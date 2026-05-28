@@ -65,12 +65,12 @@ export function Macaron({
     };
   }, [coloredScene]);
 
-  useFrame((_, delta) => {
+  /* useFrame((_, delta) => {
     if (ref.current) {
       ref.current.rotation.y += delta * speed;
       ref.current.position.y = position[1] + Math.sin(Date.now() * 0.001 + position[0]) * 0.1;
     }
-  });
+  }); */
 
   return <primitive ref={ref} object={coloredScene} position={position} />;
 }
