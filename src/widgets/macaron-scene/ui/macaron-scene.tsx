@@ -1,16 +1,18 @@
 "use client";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stage } from "@react-three/drei";
-import { sceneSetup } from "../config/scene.setup";
+import { Stage, View } from "@react-three/drei";
 import { Macaron } from "@/entities/macaron/ui/macaron";
-import "./macaron-scene.module.css"
+import { RefObject } from "react";
 
-export const MacaronScene = () => {
-  const { camera, environment, light, macaronConfig } = sceneSetup;
+export const MacaronScene = ({ config, id, track }: { config: any, id: string, track: RefObject<HTMLElement> }) => {
+  const { camera, environment, light, macaronConfig } = config;
 
   return (
-    <Canvas camera={camera}>
-      <Stage environment={environment.map} intensity={environment.intensity}>
+    <View key={id} track={track}>
+      <Stage
+        environment={environment?.map || null}
+        intensity={environment?.intensity}
+      >
+        <ambientLight intensity={4} />
         <pointLight position={light.position} intensity={light.intensity} />
         <Macaron
           colors={macaronConfig.colors}
@@ -18,7 +20,6 @@ export const MacaronScene = () => {
           speed={macaronConfig.speed}
         />
       </Stage>
-      <OrbitControls />
-    </Canvas>
+    </View>
   );
 };

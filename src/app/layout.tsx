@@ -3,8 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/widgets/header/ui/header";
 import { Footer } from "@/widgets/footer/ui/footer";
-import { Suspense } from "react";
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["cyrillic"],
@@ -28,11 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
-        <Suspense>
-          <Header/>
-          {children}
-          <Footer/>
-        </Suspense>
+        <Header/>
+        {children}
+        <Footer/>
       </body>
     </html>
   );

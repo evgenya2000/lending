@@ -1,5 +1,6 @@
 .grid {
     display: grid;
+    justify-items: center;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
     padding: 10px;
@@ -7,4 +8,10 @@
 
 .card-wrapper {
     width: 200px;
+    height: 250px;
+}
+
+.wrapper-3d {
+    width: 200px;
+    height: 150px;
 }
