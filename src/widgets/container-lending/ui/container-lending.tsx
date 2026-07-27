@@ -1,11 +1,11 @@
 "use client";
 import React, { createRef, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Suspense } from "react";
 import styles from "./container-lending.module.css";
 import { MacaronScene } from "@/widgets/macaron-scene/ui/macaron-scene";
+import { Card } from "@/helps/interface";
 
-export const ContainerLending = ({ cards }: any) => {
+export const ContainerLending = ({ cards }: {cards: Card[]}) => {
   const refsArray: React.RefObject<HTMLElement>[] = useMemo(
     () =>
       Array.from({ length: cards?.length ?? 0 }, () =>
@@ -29,13 +29,13 @@ export const ContainerLending = ({ cards }: any) => {
         zIndex: 0,
       }}
     >
-      {cards.map((card: any, index: number) => (
-        <MacaronScene key={card.id} config={card.macaronConfig} id={card.id} track={refsArray[index]} />
+      {cards.map((card: Card, index: number) => (
+        <MacaronScene key={card.id} config={card.macaronConfig} id={String(card.id)} track={refsArray[index]} />
       ))}
     </Canvas>
 
     <div className={styles.grid}>
-      {cards.map((card: any, index: number) => (
+      {cards.map((card: Card, index: number) => (
         <div key={card.id} className={styles["card-wrapper"]}>
           <div
             className={styles["wrapper-3d"]}
@@ -45,8 +45,9 @@ export const ContainerLending = ({ cards }: any) => {
           <div>
             <h3>{card.title}</h3>
             <p>{card.description}</p>
+            <p>{card.price} руб.</p>
             <button onClick={() => alert(`Куплен ${card.title}`)}>
-              Купить
+              Добавить в корзину
             </button>
           </div>
         </div>

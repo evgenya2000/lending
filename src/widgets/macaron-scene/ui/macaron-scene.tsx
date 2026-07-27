@@ -2,8 +2,9 @@
 import { Stage, View } from "@react-three/drei";
 import { Macaron } from "@/entities/macaron/ui/macaron";
 import { RefObject } from "react";
+import { MacaronSceneConfig } from "@/helps/interface";
 
-export const MacaronScene = ({ config, id, track }: { config: any, id: string, track: RefObject<HTMLElement> }) => {
+export const MacaronScene = ({ config, id, track }: { config: MacaronSceneConfig, id: string, track: RefObject<HTMLElement> }) => {
   const { camera, environment, light, macaronConfig } = config;
 
   return (
