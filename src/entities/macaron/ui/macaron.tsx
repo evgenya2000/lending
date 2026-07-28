@@ -1,8 +1,8 @@
 'use client';
 
 import { useGLTF } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import { useRef, useMemo, useEffect } from 'react';
-/* import { useFrame } from '@react-three/fiber'; */
 import * as THREE from 'three';
 
 // Цвета для каждой части (можно вынести в пропсы, если нужно)
@@ -22,7 +22,7 @@ export function Macaron({
   colors?: Partial<typeof DEFAULT_COLORS>;
 }) {
   const ref = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('./macaron.glb');
+  const { scene } = useGLTF('./macaron_conf.glb');
 
   // Объединяем переданные цвета с дефолтными
   const finalColors = { ...DEFAULT_COLORS, ...colors };
@@ -65,12 +65,12 @@ export function Macaron({
     };
   }, [coloredScene]);
 
-  /* useFrame((_, delta) => {
+  useFrame((_, delta) => {
     if (ref.current) {
       ref.current.rotation.y += delta * speed;
-      ref.current.position.y = position[1] + Math.sin(Date.now() * 0.001 + position[0]) * 0.1;
+      /* ref.current.position.y = position[1] + Math.sin(Date.now() * 0.001 + position[0]) * 0.1; */
     }
-  }); */
+  });
 
   return <primitive ref={ref} object={coloredScene} position={position} />;
 }

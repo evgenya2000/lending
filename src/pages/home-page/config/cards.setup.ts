@@ -1,4 +1,4 @@
-import { Card } from './types'; // замените на реальный путь
+import { Card } from "@/helps/interface";
 
 export const cards: Card[] = [
   {
@@ -13,7 +13,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#ff004c", Bottom: "#ff004c", Center: "#ffdada" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -30,7 +30,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#9ac791", Bottom: "#9ac791", Center: "#e3f0d7" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -47,7 +47,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#5c3a21", Bottom: "#5c3a21", Center: "#d9b48f" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -64,7 +64,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#fff44f", Bottom: "#fff44f", Center: "#fff9c4" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -81,7 +81,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#e30b5d", Bottom: "#e30b5d", Center: "#f8c8d8" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -98,7 +98,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#4a2c5e", Bottom: "#4a2c5e", Center: "#b7a0c9" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -115,7 +115,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#f5deb3", Bottom: "#f5deb3", Center: "#fff8ed" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -132,7 +132,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#c49a2c", Bottom: "#c49a2c", Center: "#fde3a7" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -149,7 +149,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#6f4e37", Bottom: "#6f4e37", Center: "#d7b49e" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -166,7 +166,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#a8e6cf", Bottom: "#a8e6cf", Center: "#ffffff" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -183,7 +183,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#b19cd9", Bottom: "#b19cd9", Center: "#f0e6ff" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -200,7 +200,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#ff7f00", Bottom: "#ff7f00", Center: "#ffe0b2" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -217,7 +217,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#f5f5dc", Bottom: "#f5f5dc", Center: "#ffffff" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -234,7 +234,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#b3002d", Bottom: "#b3002d", Center: "#f4c2c2" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -251,7 +251,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#ffcc99", Bottom: "#ffcc99", Center: "#fff2e0" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -268,7 +268,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#3b1f4a", Bottom: "#3b1f4a", Center: "#b280c2" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -285,7 +285,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#b8860b", Bottom: "#b8860b", Center: "#e6c27a" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -302,7 +302,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#ff69b4", Bottom: "#ff69b4", Center: "#ffe4e1" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -319,7 +319,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FFB347", Bottom: "#FFB347", Center: "#FFF0B3" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -336,7 +336,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#3F51B5", Bottom: "#3F51B5", Center: "#C9B1FF" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -353,7 +353,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#4A0033", Bottom: "#4A0033", Center: "#E6B3CC" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -370,7 +370,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#C71585", Bottom: "#C71585", Center: "#FFB6C1" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -387,7 +387,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#5C4033", Bottom: "#5C4033", Center: "#F5DEB3" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -404,7 +404,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FFD700", Bottom: "#FFD700", Center: "#FFFFF0" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -421,7 +421,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#5B8C2A", Bottom: "#5B8C2A", Center: "#E0F0D0" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -438,7 +438,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#F5A3C7", Bottom: "#F5A3C7", Center: "#FFF0F5" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -455,7 +455,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FF66B2", Bottom: "#FF66B2", Center: "#FFE0F0" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -472,7 +472,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#B2C248", Bottom: "#B2C248", Center: "#F5FAD2" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -489,7 +489,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#DAA520", Bottom: "#DAA520", Center: "#FFFACD" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -506,7 +506,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FFE135", Bottom: "#5C3A21", Center: "#FFF8DC" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -523,7 +523,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#8BC34A", Bottom: "#8BC34A", Center: "#DCEDC8" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -540,7 +540,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#9AC791", Bottom: "#E30B5D", Center: "#F8C8D8" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -557,7 +557,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FFB100", Bottom: "#FFB100", Center: "#FFECB3" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -574,7 +574,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#2E0854", Bottom: "#2E0854", Center: "#D8BFD8" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -591,7 +591,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#9B111E", Bottom: "#9B111E", Center: "#FFB6C1" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -608,7 +608,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#C49A2C", Bottom: "#C49A2C", Center: "#FFE4B5" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -625,7 +625,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FF7518", Bottom: "#FF7518", Center: "#FFDAB9" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -642,7 +642,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FF4500", Bottom: "#FF4500", Center: "#FFDAB9" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -659,7 +659,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FF6B6B", Bottom: "#FF6B6B", Center: "#FFE0E0" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -676,7 +676,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#4A1F1F", Bottom: "#4A1F1F", Center: "#FFB6C1" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -693,7 +693,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#F5F5DC", Bottom: "#32CD32", Center: "#FFFFFF" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -710,7 +710,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FFB347", Bottom: "#FFB347", Center: "#FFE5B4" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -727,7 +727,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FF3B3B", Bottom: "#2E8B57", Center: "#FFFFFF" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -744,7 +744,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#DAA520", Bottom: "#DAA520", Center: "#FFFACD" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -761,7 +761,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#3E2723", Bottom: "#3E2723", Center: "#D7CCC8" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -778,7 +778,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FFE4B5", Bottom: "#FFE4B5", Center: "#FFF8DC" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -795,7 +795,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FFFACD", Bottom: "#FFFACD", Center: "#FFFFF0" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -812,7 +812,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#4A3B32", Bottom: "#4A3B32", Center: "#E6D3C8" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -829,7 +829,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FFD700", Bottom: "#B19CD9", Center: "#F0E6FF" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },
@@ -846,7 +846,7 @@ export const cards: Card[] = [
       light: { position: [0, 3, 3] as [number, number, number], intensity: 8 },
       macaronConfig: {
         colors: { Top: "#FFFFFF", Bottom: "#E30B5D", Center: "#F8C8D8" },
-        position: [0, 0, 1.5] as [number, number, number],
+        position: [0, 0, 0] as [number, number, number],
         speed: 0.8,
       },
     },

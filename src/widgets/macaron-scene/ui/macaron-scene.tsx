@@ -1,17 +1,34 @@
 "use client";
-import { Stage, View } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, Stage, View } from "@react-three/drei";
 import { Macaron } from "@/entities/macaron/ui/macaron";
-import { RefObject } from "react";
 import { MacaronSceneConfig } from "@/helps/interface";
 
-export const MacaronScene = ({ config, id, track }: { config: MacaronSceneConfig, id: string, track: RefObject<HTMLElement> }) => {
-  const { camera, environment, light, macaronConfig } = config;
+export const MacaronScene = ({
+  config,
+  id,
+  track,
+}: {
+  config: MacaronSceneConfig;
+  id: string;
+  track: React.RefObject<HTMLElement>;
+}) => {
+  const { camera: cameraConfig, environment, light, macaronConfig } = config;
 
   return (
     <View key={id} track={track}>
+      {/* Камера внутри View, становится дефолтной для этого View */}
+      <PerspectiveCamera
+        makeDefault
+        fov={cameraConfig?.fov ?? 45}
+        near={cameraConfig?.near ?? 0.1}
+        far={cameraConfig?.far ?? 1000}
+        position={cameraConfig?.position ?? [0, 0, 5]}
+      />
+
       <Stage
         environment={environment?.map || null}
         intensity={environment?.intensity}
+        shadows={false}
       >
         <ambientLight intensity={4} />
         <pointLight position={light.position} intensity={light.intensity} />
@@ -21,6 +38,11 @@ export const MacaronScene = ({ config, id, track }: { config: MacaronSceneConfig
           speed={macaronConfig.speed}
         />
       </Stage>
+
+      {/* OrbitControls управляет камерой этого View и слушает события только внутри track */}
+      {track.current && (
+        <OrbitControls makeDefault domElement={track.current} enableZoom={false}/>
+      )}
     </View>
   );
 };

@@ -30,7 +30,10 @@ export interface MacaronSceneConfig {
 }
 
 interface CameraConfig {
-  position: number[];
+  position: PositionT;
+  fov?: number;
+  near?: number;
+  far?: number;
 }
 
 interface EnvironmentConfig {
@@ -39,7 +42,7 @@ interface EnvironmentConfig {
 }
 
 interface LightConfig {
-  position: number | Vector3 | [x: number, y: number, z: number] | readonly [x: number, y: number, z: number] | Readonly<Vector3> | undefined;
+  position: PositionT;
   intensity: number;
 }
 
@@ -52,3 +55,5 @@ interface MacaronVisualConfig {
   position: [number, number, number]
   speed: number;
 }
+
+type PositionT = number | Vector3 | [x: number, y: number, z: number] | readonly [x: number, y: number, z: number] | Readonly<Vector3> | undefined;
