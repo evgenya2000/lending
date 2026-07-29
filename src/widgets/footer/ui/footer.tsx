@@ -1,7 +1,7 @@
 export const Footer = () => {
     return(
-        <div>
+        <footer>
             <p>Сделано с позитивным настроением</p>
-        </div>
+        </footer>
     );
 }

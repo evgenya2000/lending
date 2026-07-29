@@ -1,4 +1,4 @@
-import { AppliedFilters, Card } from "@/helps/interface";
+import { AppliedFilters, Card } from "@/shared/model/types";
 import { useMemo, useState } from "react";
 
 export const useFilterCards = (cards: Card[]) => {

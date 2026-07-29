@@ -1,7 +1,7 @@
 "use client";
 import { OrbitControls, PerspectiveCamera, Stage, View } from "@react-three/drei";
 import { Macaron } from "@/entities/macaron/ui/macaron";
-import { MacaronSceneConfig } from "@/helps/interface";
+import { MacaronSceneConfig } from "@/shared/model/types";
 
 export const MacaronScene = ({
   config,

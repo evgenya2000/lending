@@ -1,4 +1,9 @@
-.wrapper {
+.wrapper-lending {
+    display: flex;
+}
+
+.wrapper-center {
+    width: 100%;
     display: flex;
 }
 

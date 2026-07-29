@@ -1,7 +1,7 @@
 "use client";
 
 import { Filters } from "@/entities/filters/ui/filters";
-import { AppliedFilters } from "@/helps/interface";
+import { AppliedFilters } from "@/shared/model/types";
 
 
 export const ContainerFilters = (

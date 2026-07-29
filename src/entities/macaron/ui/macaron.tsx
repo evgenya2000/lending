@@ -22,7 +22,7 @@ export function Macaron({
   colors?: Partial<typeof DEFAULT_COLORS>;
 }) {
   const ref = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('./macaron_conf.glb');
+  const { scene } = useGLTF('./macaron_conf1.glb');
 
   // Объединяем переданные цвета с дефолтными
   const finalColors = { ...DEFAULT_COLORS, ...colors };

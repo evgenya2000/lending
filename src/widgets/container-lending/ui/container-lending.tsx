@@ -1,41 +1,31 @@
 "use client";
-import React, { createRef, useMemo } from "react";
-import { Canvas } from "@react-three/fiber";
+import React from "react";
 import styles from "./container-lending.module.css";
 import { MacaronScene } from "@/widgets/macaron-scene/ui/macaron-scene";
-import { Card } from "@/helps/interface";
-
+import { Card } from "@/shared/model/types";
+import { ConteinerCanvas } from "@/shared/ui/conteiner-canvas";
+import { useRefsArray } from "@/shared/lib/hooks/use-refs-array";
+import { useCart } from "@/features/cart/useCart";
 export const ContainerLending = ({ cards }: {cards: Card[]}) => {
-  const refsArray: React.RefObject<HTMLElement>[] = useMemo(
-    () =>
-      Array.from({ length: cards?.length ?? 0 }, () =>
-        createRef<HTMLElement>() as React.RefObject<HTMLElement>
-      ),
-    [cards?.length]
-  );
+  const { addItem, getQuantityInCart, increment, decrement } = useCart();
+  const refsArray: React.RefObject<HTMLElement>[] = useRefsArray(cards?.length ?? 0);
 
   if (!cards?.length) return <p>Ничего не найдено</p>;
 
   return (
   <>
-    <Canvas
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        pointerEvents: "none",
-        zIndex: 0,
-      }}
+    <ConteinerCanvas
     >
       {cards.map((card: Card, index: number) => (
         <MacaronScene key={card.id} config={card.macaronConfig} id={String(card.id)} track={refsArray[index]} />
       ))}
-    </Canvas>
+    </ConteinerCanvas>
 
     <div className={styles.grid}>
-      {cards.map((card: Card, index: number) => (
+      {cards.map((card: Card, index: number) => {
+        const quantity = getQuantityInCart(card.id);
+        return(
+        
         <div key={card.id} className={styles["card-wrapper"]}>
           <div
             className={styles["wrapper-3d"]}
@@ -46,12 +36,13 @@ export const ContainerLending = ({ cards }: {cards: Card[]}) => {
             <h3>{card.title}</h3>
             <p>{card.description}</p>
             <p>{card.price} руб.</p>
-            <button onClick={() => alert(`Куплен ${card.title}`)}>
+            {!!quantity && <button onClick={() => decrement(card.id)}>-</button>}{!!quantity && <p>{quantity}</p>}{!!quantity && <button onClick={() => increment(card.id)}>+</button>}
+            {!quantity && <button onClick={() => addItem(card)}>
               Добавить в корзину
-            </button>
+            </button>}
           </div>
         </div>
-      ))}
+      )})}
     </div>
   </>
 );

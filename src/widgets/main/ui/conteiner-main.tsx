@@ -1,14 +1,20 @@
 import { JSX } from "react";
 import styles from "./container-main.module.css"
-export const ContainerMain = ({ left, right }: { left: JSX.Element; right: JSX.Element }) => {
+export const ContainerMain = ({ left, right, allWidth }: { left?: JSX.Element; right?: JSX.Element; allWidth?: JSX.Element; }) => {
   return (
-    <div className={styles["wrapper"]}>
-      <div className={styles["left"]}>
-        {left}
-      </div>
-      <div className={styles["right"]}>
-        {right}
-      </div>
+    <div>
+      {!allWidth ?
+        <main className={styles["wrapper-lending"]}>
+          <div className={styles["left"]}>
+            {left}
+          </div>
+          <div className={styles["right"]}>
+            {right}
+          </div>
+        </main> :
+        <main className={styles["wrapper-center"]}>
+          {allWidth}
+        </main>}
     </div>
   );
 };

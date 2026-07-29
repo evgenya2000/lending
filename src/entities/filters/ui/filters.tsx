@@ -1,5 +1,5 @@
 "use client";
-import { AppliedFilters } from "@/helps/interface";
+import { AppliedFilters } from "@/shared/model/types";
 import { useFiltersForm } from "../hooks/useFiltersForm";
 import { Controller } from "react-hook-form";
 
