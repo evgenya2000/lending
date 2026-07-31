@@ -1,6 +1,7 @@
+import styles from "./footer.module.css"
 export const Footer = () => {
     return(
-        <footer>
+        <footer className={styles["footer"]}>
             <p>Сделано с позитивным настроением</p>
         </footer>
     );
