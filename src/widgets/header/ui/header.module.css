@@ -1,5 +1,42 @@
 .header {
     display: flex;
     width: 100%;
+    justify-content: space-between;
+    align-items: center;
     background-color: #FFE3E3;
+
+    nav {
+        display: flex; 
+        align-items: center;
+        gap: 12px;
+        margin-right: 35px;
+
+    }
+    
+}
+
+.basket {
+    position: relative;
+    display: flex; 
+    align-items: end;
+    gap: 5px;
+    svg {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+.totalQuantity {
+    font-weight: 530;
+    font-size: 18px;
+    position: absolute;
+    top: -2px;
+    left: 20px;
+    border-radius: 64px;
+    background-color: #FF7171;
+    width: auto;
+    text-align: center;
+    height: 22px;
+    padding: 1px 5px;
+    color: #Ffff;
 }

@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/widgets/header/ui/header";
 import { Footer } from "@/widgets/footer/ui/footer";
 import StoreProvider from "./store-provider";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["cyrillic"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["cyrillic"],
-});
+import styles from "./fonts.module.css"
 
 export const metadata: Metadata = {
   title: "Macarons",
@@ -25,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={styles["onest-global"]}>
       <head>
         <link rel="icon" href="./favicon.ico"/>
       </head>

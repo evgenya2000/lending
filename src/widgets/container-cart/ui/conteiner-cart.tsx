@@ -39,7 +39,7 @@ export const ContainerCart = () => {
                         <div >
                             <h3>{item.title}</h3>
                             <p>{item.description}</p>
-                            <p>Цена: {item.price} руб.</p>
+                            <p>Цена: {item.price} ₽</p>
                         </div>
                         <div >
                             <button onClick={() => decrement(item.id)}>-</button>
