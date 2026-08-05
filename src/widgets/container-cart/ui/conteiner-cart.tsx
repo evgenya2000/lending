@@ -1,6 +1,6 @@
 "use client";
 
-import { useRefsArray } from '@/shared/lib/hooks/use-refs-array';
+import { useRefsMap } from '@/shared/lib/hooks/use-refs-map';
 import { Card, CartItem } from '@/shared/model/types';
 import styles from "./conteiner-cart.module.css"
 import { ConteinerCanvas } from '@/shared/ui/conteiner-canvas';
@@ -9,7 +9,8 @@ import { useCart } from '@/features/cart/useCart';
 
 export const ContainerCart = () => {
     const { items, totalPrice, increment, decrement, removeItem, clearCart, totalQuantity } = useCart();
-    const refsArray: React.RefObject<HTMLElement>[] = useRefsArray(items?.length ?? 0);
+    const keys = items.map(c => String(c.id));
+    const refsMap = useRefsMap<HTMLDivElement>(keys);
 
     if (items.length === 0) {
         return (
@@ -23,17 +24,17 @@ export const ContainerCart = () => {
     return (
         <div >
             <ConteinerCanvas>
-                {items.map((item: Card, index: number) => (
-                    <MacaronScene key={item.id} config={item.macaronConfig} id={String(item.id)} track={refsArray[index]} />
+                {items.map((item: Card) => (
+                    <MacaronScene key={item.id} config={item.macaronConfig} id={String(item.id)} track={refsMap.get(String(item.id))!} />
                 ))}
             </ConteinerCanvas>
             <h2>Ваша корзина</h2>
             <ul >
-                {items.map((item: CartItem, index: number) => (
+                {items.map((item: CartItem) => (
                     <li key={item.id} >
                         <div
                             className={styles["wrapper-3d"]}
-                            ref={refsArray[index] as React.RefObject<HTMLDivElement>}
+                            ref={refsMap.get(String(item.id))!}
                             style={{ position: "relative" }}
                         />
                         <div >

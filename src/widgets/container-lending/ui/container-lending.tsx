@@ -1,14 +1,14 @@
 "use client";
-import React from "react";
 import styles from "./container-lending.module.css";
 import { MacaronScene } from "@/widgets/macaron-scene/ui/macaron-scene";
 import { Card } from "@/shared/model/types";
 import { ConteinerCanvas } from "@/shared/ui/conteiner-canvas";
-import { useRefsArray } from "@/shared/lib/hooks/use-refs-array";
+import { useRefsMap } from "@/shared/lib/hooks/use-refs-map";
 import { useCart } from "@/features/cart/useCart";
 export const ContainerLending = ({ cards }: { cards: Card[] }) => {
   const { addItem, getQuantityInCart, increment, decrement } = useCart();
-  const refsArray: React.RefObject<HTMLElement>[] = useRefsArray(cards?.length ?? 0);
+  const keys = cards.map(c => String(c.id));
+  const refsMap = useRefsMap<HTMLDivElement>(keys);
 
   if (!cards?.length) return <p>Ничего не найдено</p>;
 
@@ -16,20 +16,19 @@ export const ContainerLending = ({ cards }: { cards: Card[] }) => {
     <>
       <ConteinerCanvas
       >
-        {cards.map((card: Card, index: number) => (
-          <MacaronScene key={card.id} config={card.macaronConfig} id={String(card.id)} track={refsArray[index]} />
+        {cards.map((card: Card) => (
+          <MacaronScene key={card.id} config={card.macaronConfig} id={String(card.id)} track={refsMap.get(String(card.id))!} />
         ))}
       </ConteinerCanvas>
 
       <div className={styles.grid}>
-        {cards.map((card: Card, index: number) => {
+        {cards.map((card: Card) => {
           const quantity = getQuantityInCart(card.id);
           return (
-
             <div key={card.id} className={styles["card-wrapper"]}>
               <div
                 className={styles["wrapper-3d"]}
-                ref={refsArray[index] as React.RefObject<HTMLDivElement>}
+                ref={refsMap.get(String(card.id))!}
                 style={{ position: "relative" }}
               />
               <div className={styles["card-wrapper-text"]}>
