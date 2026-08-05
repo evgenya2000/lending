@@ -3,13 +3,14 @@ import { AppliedFilters } from "@/shared/model/types";
 import { useFiltersForm } from "../hooks/useFiltersForm";
 import { Controller } from "react-hook-form";
 import styles from "./filters.module.css";
+import { TasteCheckboxes } from "./taste-checkbox";
 
 const TASTES = [
   'абрикос', 'ананас', 'арбуз', 'банан', 'белый шоколад', 'бергамот', 'голубика', 'грейпфрут', 'изюм', 'имбирь', 'инжир', 'киви', 'кленовый сироп', 'клюква', 'красный апельсин', 'крем-брюле', 'лайм', 'личи', 'манго', 'маракуйя', 'марципан', 'матча', 'мёд', 'миндаль', 'попкорн', 'роза', 'розовый перец', 'ром', 'тирамису', 'тыква', 'чай', 'чёрная смородина', 'чили'
 ];
 
 export const Filters = ({ onApply }: { onApply: (filters: AppliedFilters) => void }) => {
-  const { control, handleSubmit, handlePriceBlur, handlePriceFocus } =
+  const { control, handleSubmit, handlePriceBlur, handlePriceFocus, handleReset } =
     useFiltersForm(onApply);
 
   return (
@@ -55,36 +56,18 @@ export const Filters = ({ onApply }: { onApply: (filters: AppliedFilters) => voi
           name="tastes"
           control={control}
           render={({ field }) => (
-            <div className={styles.optionsContainer}>
-              {TASTES.map((taste) => {
-                const isActive = field.value.includes(taste);
-                return (
-                  <label
-                    key={taste}
-                    className={`${styles.optionLabel} ${isActive ? styles.optionLabelActive : ''}`}
-                  >
-                    <input
-                      type="checkbox"
-                      className={styles.checkbox}
-                      value={taste}
-                      checked={isActive}
-                      onChange={(e) => {
-                        const checked = e.target.checked;
-                        const newValue = checked
-                          ? [...field.value, taste]
-                          : field.value.filter((v) => v !== taste);
-                        field.onChange(newValue);
-                      }}
-                    />
-                    {taste}
-                  </label>
-                );
-              })}
-            </div>
+            <TasteCheckboxes
+              tastes={TASTES}
+              selected={field.value}
+              onChange={field.onChange}
+            />
           )}
         />
       </fieldset>
-      <button type="submit" className={styles["button"]}>Применить</button>
+      <div className={styles["buttons"]}>
+        <button type="submit" className={styles["button"]}>Применить</button>
+        <button type="button" onClick={handleReset} className={styles["button"]}>Сбросить</button>
+      </div>
     </form>
   );
 };

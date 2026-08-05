@@ -1,5 +1,4 @@
-import { Card } from "@/helps/interface";
-
+import { Card } from "@/shared/model/types";
 export const cards: Card[] = [
   {
     id: 1,

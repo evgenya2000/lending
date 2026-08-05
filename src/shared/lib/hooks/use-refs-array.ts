@@ -16,7 +16,7 @@ export function useRefsArray<T extends HTMLElement = HTMLElement>(
   length: number
 ): RefObject<T>[] {
   return useMemo(
-    () => Array.from({ length }, () => createRef<T>()),
+    () => Array.from({ length }, () => createRef<T>() as RefObject<T>),
     [length]
   );
 }

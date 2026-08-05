@@ -1,4 +1,4 @@
-import CartPage from "@/pages/cart/ui/cart-page";
+import CartPage from "@/pages-slice/cart/ui/cart-page";
 
 export const metadata = {
   title: '',

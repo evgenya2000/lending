@@ -1,15 +1,23 @@
 import { useForm } from 'react-hook-form';
-import { useRef, useCallback } from 'react';
-import { AppliedFilters, FilterFormValues } from '@/helps/interface';
+import { useRef, useCallback, useState, useEffect } from 'react';
+import { AppliedFilters, FilterFormValues } from '@/shared/model/types';
+
+const defaultValues: FilterFormValues = {
+  priceFrom: '0',
+  priceTo: '',
+  tastes: [],
+};
 
 export const useFiltersForm = (onFilterSubmit: (filters: AppliedFilters) => void) => {
-  const { control, handleSubmit, getValues, setValue } = useForm({
-    defaultValues: { priceFrom: '0', priceTo: '', tastes: [], },
+  const { control, handleSubmit, getValues, setValue, reset } = useForm({
+    defaultValues: defaultValues,
   });
 
   // Рефы для сохранения значений на момент получения фокуса
   const previousFrom = useRef('0');
   const previousTo = useRef('');
+
+  const [resetTriggered, setResetTriggered] = useState(false);
 
   // Проверка, можно ли оставить введённое значение
   const isValidPriceUpdate = (
@@ -59,10 +67,17 @@ export const useFiltersForm = (onFilterSubmit: (filters: AppliedFilters) => void
     onFilterSubmit?.({ priceFrom: from || undefined, priceTo: to || undefined, tastes: [...data.tastes] });
   };
 
+  const handleReset = () => {
+    // TODO: сделать красивое обновление в фильтрах
+    reset(defaultValues);
+    onFilterSubmit({ priceFrom: undefined, priceTo: undefined, tastes: [] });
+  };
+
   return {
     control,
     handleSubmit: handleSubmit(onSubmit),
     handlePriceBlur,
     handlePriceFocus,
+    handleReset
   };
 };
