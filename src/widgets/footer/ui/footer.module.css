@@ -1,3 +1,43 @@
 .footer {
     background-color: #FFE3E3;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: end;
+    padding: 40px 30px 20px 30px;
+    color: #6b6b6b;
+    font-size: 14px;
+}
+
+.wrapper-icons {
+    display: flex;
+    gap: 8px;
+
+    a {
+        display: block;
+        width: 30px;
+        height: 30px;
+        
+        svg {
+            color: #96669A;
+            transition: all 0.3s ease;
+        }
+    }
+
+    a:first-child {
+        svg:hover {
+            color: #24A1CA;
+        }
+    }
+    a:nth-child(2) {
+        svg:hover {
+            color: #0E75FE;
+        }
+    }
+    a:nth-child(3) {
+        svg:hover {
+            color: #FF7171;
+        }
+    }
 }

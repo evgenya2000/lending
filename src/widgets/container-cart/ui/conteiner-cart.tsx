@@ -6,6 +6,7 @@ import styles from "./conteiner-cart.module.css"
 import { ConteinerCanvas } from '@/shared/ui/conteiner-canvas';
 import { MacaronScene } from '@/widgets/macaron-scene/ui/macaron-scene';
 import { useCart } from '@/features/cart/useCart';
+import { Delete } from '@/shared/icons/delete';
 
 export const ContainerCart = () => {
     const { items, totalPrice, increment, decrement, removeItem, clearCart, totalQuantity } = useCart();
@@ -14,21 +15,21 @@ export const ContainerCart = () => {
 
     if (items.length === 0) {
         return (
-            <div>
-                <h2>Корзина пуста</h2>
+            <div className={styles["conteiner"]}>
+                <h3>Корзина пуста</h3>
                 <p>Добавьте товары из каталога</p>
             </div>
         );
     }
 
     return (
-        <div >
+        <div className={styles["conteiner"]}>
             <ConteinerCanvas>
                 {items.map((item: Card) => (
                     <MacaronScene key={item.id} config={item.macaronConfig} id={String(item.id)} track={refsMap.get(String(item.id))!} />
                 ))}
             </ConteinerCanvas>
-            <h2>Ваша корзина</h2>
+            <h3>Ваша корзина</h3>
             <ul >
                 {items.map((item: CartItem) => (
                     <li key={item.id} >
@@ -46,7 +47,7 @@ export const ContainerCart = () => {
                             <button onClick={() => decrement(item.id)}>-</button>
                             <span>{item.quantity}</span>
                             <button onClick={() => increment(item.id)}>+</button>
-                            <button onClick={() => removeItem(item.id)}>🗑️</button>
+                            <button className={styles["delete"]} onClick={() => removeItem(item.id)}><Delete/></button>
                         </div>
                         <div>
                             <strong>{item.price * item.quantity} руб.</strong>
