@@ -4,10 +4,6 @@
     width: 100%;
 }
 
-.conteiner h2 {
-    margin-bottom: 20px;
-}
-
 .conteiner ul {
     list-style: none;
     padding: 0;
@@ -24,7 +20,6 @@
     padding: 15px;
 }
 
-/* 3D-сцена (как в карточках лендинга) */
 .wrapper-3d {
     width: 150px;
     height: 130px;
@@ -32,137 +27,133 @@
     flex-shrink: 0;
 }
 
-/* Блок с названием, описанием и ценой */
-.conteiner li>div:nth-child(2) {
+.wrapper-text {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 4px;
+
+    h3 {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    p {
+        margin: 0;
+        font-size: 12px;
+        color: #6B6B6B;
+    }
+
+    p:last-child {
+        font-size: 14px;
+        font-weight: 400;
+        background-color: #ff7171;
+        color: #fff;
+        border-radius: 64px;
+        padding: 6px 10px;
+        display: inline-block;
+        width: max-content;
+        margin-top: 4px;
+    }
 }
 
-.conteiner li h3 {
-    font-size: 18px;
-    margin: 0;
-}
-
-.conteiner li p {
-    margin: 0;
-    font-size: 12px;
-    color: #6B6B6B;
-}
-
-/* Цена за единицу (красный «пилюля») */
-.conteiner li>div:nth-child(2) p:last-child {
-    font-size: 14px;
-    font-weight: 400;
-    background-color: #ff7171;
-    color: #fff;
-    border-radius: 64px;
-    padding: 6px 10px;
-    display: inline-block;
-    width: max-content;
-    margin-top: 4px;
-}
-
-/* Управление количеством */
-.conteiner li>div:nth-child(3) {
+.wrapper-button {
     display: flex;
     align-items: center;
     gap: 8px;
+
+    button:not(.delete) {
+        font-size: 16px;
+        color: #fff;
+        background-color: #96669A;
+        border-radius: 10px;
+        border: none;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover:not(.delete) {
+        background-color: #5C405E;
+    }
+
+    span {
+        font-size: 16px;
+        min-width: 24px;
+        text-align: center;
+    }
 }
 
-.conteiner li>div:nth-child(3) button {
-    font-size: 16px;
-    color: #fff;
-    background-color: #96669A;
-    border-radius: 10px;
-    border: none;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
 
-.conteiner li>div:nth-child(3) button:hover {
-    background-color: #5C405E;
-}
-
-.conteiner li>div:nth-child(3) span {
-    font-size: 16px;
-    min-width: 24px;
-    text-align: center;
-    color: #FF7171;
-}
-
-/* Кнопка удаления (корзина) */
 .delete {
     width: 30px;
     height: 30px;
-    color: #ffb0b0;
+    color: #ff7171;
+    background: none;
+    border: none;
+    transition: color 0.3s ease;
 }
 
-.conteiner li>div:nth-child(3) button:last-child:hover {
-    color:
+.delete:hover {
+    color: #E86568;
+    cursor: pointer;
 }
 
-/* Итоговая стоимость позиции */
-.conteiner li>div:nth-child(4) strong {
+.price {
     font-size: 18px;
+    font-weight: 600;
     color: #333;
     margin-left: 10px;
 }
 
-/* Блок с итогами и кнопками */
-.conteiner>div:last-child {
+.wrapper-total {
     margin-top: 30px;
     background: #f9f9f9;
     padding: 20px;
     border-radius: 16px;
-}
 
-.conteiner>div:last-child h3 {
-    font-size: 22px;
-    margin: 0 0 10px;
-}
+    h3 {
+        margin: 0 0 10px;
+    }
 
-.conteiner>div:last-child p {
-    font-size: 14px;
-    color: #6B6B6B;
-    margin-bottom: 20px;
-}
+    p {
+        font-size: 14px;
+        color: #6B6B6B;
+        margin-bottom: 20px;
+    }
 
-/* Основные кнопки действий */
-.conteiner>div:last-child button {
-    font-size: 16px;
-    font-weight: 500;
-    color: #fff;
-    background-color: #96669A;
-    border-radius: 14px;
-    border: none;
-    padding: 10px 24px;
-    margin-right: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    button {
+        font-size: 16px;
+        font-weight: 500;
+        color: #fff;
+        background-color: #96669A;
+        border-radius: 14px;
+        border: none;
+        padding: 10px 24px;
+        margin-right: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-.conteiner>div:last-child button:hover:not(:disabled) {
-    background-color: #5C405E;
-}
+    button:hover:not(:disabled) {
+        background-color: #5C405E;
+    }
 
-.conteiner>div:last-child button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
+    button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
 
-/* Кнопка «Очистить корзину» */
-.conteiner>div:last-child button:last-child {
-    background-color: #e0e0e0;
-    color: #333;
-}
+    button:last-child {
+        background-color: #e0e0e0;
+        color: #333;
+    }
 
-.conteiner>div:last-child button:last-child:hover {
-    background-color: #bdbdbd;
+    button:last-child:hover {
+        background-color: #bdbdbd;
+    }
 }

@@ -38,24 +38,24 @@ export const ContainerCart = () => {
                             ref={refsMap.get(String(item.id))!}
                             style={{ position: "relative" }}
                         />
-                        <div >
+                        <div className={styles["wrapper-text"]}>
                             <h3>{item.title}</h3>
                             <p>{item.description}</p>
                             <p>Цена: {item.price} ₽</p>
                         </div>
-                        <div >
+                        <div className={styles["wrapper-button"]}>
                             <button onClick={() => decrement(item.id)}>-</button>
                             <span>{item.quantity}</span>
                             <button onClick={() => increment(item.id)}>+</button>
                             <button className={styles["delete"]} onClick={() => removeItem(item.id)}><Delete/></button>
                         </div>
-                        <div>
-                            <strong>{item.price * item.quantity} руб.</strong>
+                        <div className={styles["price"]}>
+                            {item.price * item.quantity} руб.
                         </div>
                     </li>
                 ))}
             </ul>
-            <div>
+            <div className={styles["wrapper-total"]}>
                 <h3>Итого: {totalPrice} руб.</h3>
                 <p>Внимание: заказы принимаются от 6 единиц товара!</p>
                 <button onClick={() => alert('Заказ успешно оформлен')} disabled={totalQuantity < 6}>
