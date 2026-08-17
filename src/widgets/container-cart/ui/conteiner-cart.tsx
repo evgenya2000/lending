@@ -7,11 +7,28 @@ import { ConteinerCanvas } from '@/shared/ui/conteiner-canvas';
 import { MacaronScene } from '@/widgets/macaron-scene/ui/macaron-scene';
 import { useCart } from '@/features/cart/useCart';
 import { Delete } from '@/shared/icons/delete';
+import { useModal } from '@/features/modal/lib/use-modal';
 
 export const ContainerCart = () => {
     const { items, totalPrice, increment, decrement, removeItem, clearCart, totalQuantity } = useCart();
+    const orderModal = useModal('order');
+    const confirmModal = useModal('confirm');
+    const infoModal = useModal('info');
+
     const keys = items.map(c => String(c.id));
     const refsMap = useRefsMap<HTMLDivElement>(keys);
+
+    /* const handleClearCart = () => {
+        confirmModal.open();
+    }; */
+
+    const handleCheckout = () => {
+        if (totalQuantity < 6) {
+            infoModal.open();
+        } else {
+            orderModal.open();
+        }
+    };
 
     if (items.length === 0) {
         return (
@@ -47,7 +64,7 @@ export const ContainerCart = () => {
                             <button onClick={() => decrement(item.id)}>-</button>
                             <span>{item.quantity}</span>
                             <button onClick={() => increment(item.id)}>+</button>
-                            <button className={styles["delete"]} onClick={() => removeItem(item.id)}><Delete/></button>
+                            <button className={styles["delete"]} onClick={() => removeItem(item.id)}><Delete /></button>
                         </div>
                         <div className={styles["price"]}>
                             {item.price * item.quantity} руб.
@@ -58,7 +75,7 @@ export const ContainerCart = () => {
             <div className={styles["wrapper-total"]}>
                 <h3>Итого: {totalPrice} руб.</h3>
                 <p>Внимание: заказы принимаются от 6 единиц товара!</p>
-                <button onClick={() => alert('Заказ успешно оформлен')} disabled={totalQuantity < 6}>
+                <button onClick={handleCheckout} disabled={totalQuantity < 6}>
                     Оформить заказ
                 </button>
                 <button onClick={clearCart}>
