@@ -68,32 +68,6 @@
     display: flex;
     gap: 5px;
     align-items: center;
-
-    button {
-        font-size: 16px;
-        color: #fff;
-        background-color: #96669A;
-        border-radius: 10px;
-        border: none;
-        width: 28px;
-        height: 28px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: all 0.3s ease; 
-    }
-
-    button:first-child {
-        padding: 0 1px 3px 0;
-    }
-    button:last-child {
-        padding-top: 2px;
-    }
-
-    button:hover {
-        background-color: #5C405E;
-        cursor: pointer;
-    }
 }
 
 .wrapper-3d {

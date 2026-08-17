@@ -1,0 +1,69 @@
+.wrapper-order-form {
+  width: 500px;
+
+  p {
+    font-size: 14px;
+    margin-bottom: 16px;
+    color: #6b6b6b;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .radioGroup {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .radioLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #444;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .radioLabel input[type='radio'] {
+    accent-color: #96669a;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .error {
+    color: #e74c3c;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+
+}

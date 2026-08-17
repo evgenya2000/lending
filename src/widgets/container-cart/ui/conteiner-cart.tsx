@@ -8,12 +8,13 @@ import { MacaronScene } from '@/widgets/macaron-scene/ui/macaron-scene';
 import { useCart } from '@/features/cart/useCart';
 import { Delete } from '@/shared/icons/delete';
 import { useModal } from '@/features/modal/lib/use-modal';
+import { Button } from '@/shared/ui/button/button';
 
 export const ContainerCart = () => {
     const { items, totalPrice, increment, decrement, removeItem, clearCart, totalQuantity } = useCart();
     const orderModal = useModal('order');
-    const confirmModal = useModal('confirm');
-    const infoModal = useModal('info');
+    /* const confirmModal = useModal('confirm');
+    const infoModal = useModal('info'); */
 
     const keys = items.map(c => String(c.id));
     const refsMap = useRefsMap<HTMLDivElement>(keys);
@@ -23,11 +24,7 @@ export const ContainerCart = () => {
     }; */
 
     const handleCheckout = () => {
-        if (totalQuantity < 6) {
-            infoModal.open();
-        } else {
-            orderModal.open();
-        }
+        orderModal.open();
     };
 
     if (items.length === 0) {
@@ -61,26 +58,32 @@ export const ContainerCart = () => {
                             <p>Цена: {item.price} ₽</p>
                         </div>
                         <div className={styles["wrapper-button"]}>
-                            <button onClick={() => decrement(item.id)}>-</button>
+                            <Button variant="quantity" onClick={() => decrement(item.id)}>
+                                -
+                            </Button>
                             <span>{item.quantity}</span>
-                            <button onClick={() => increment(item.id)}>+</button>
-                            <button className={styles["delete"]} onClick={() => removeItem(item.id)}><Delete /></button>
+                            <Button variant="quantity" onClick={() => increment(item.id)}>
+                                +
+                            </Button>
+                            <Button variant="delete" onClick={() => removeItem(item.id)}>
+                                <Delete />
+                            </Button>
                         </div>
-                        <div className={styles["price"]}>
-                            {item.price * item.quantity} руб.
-                        </div>
+                        <div className={styles["price"]}>{item.price * item.quantity} руб.</div>
                     </li>
                 ))}
             </ul>
             <div className={styles["wrapper-total"]}>
                 <h3>Итого: {totalPrice} руб.</h3>
                 <p>Внимание: заказы принимаются от 6 единиц товара!</p>
-                <button onClick={handleCheckout} disabled={totalQuantity < 6}>
-                    Оформить заказ
-                </button>
-                <button onClick={clearCart}>
-                    Очистить корзину
-                </button>
+                <div className={styles["wrapper-total-button"]}>
+                    <Button type="button" onClick={handleCheckout} disabled={totalQuantity < 6}>
+                        Оформить заказ
+                    </Button>
+                    <Button type="button" onClick={clearCart} variant="secondary">
+                        Очистить корзину
+                    </Button>
+                </div>
             </div>
         </div>
     );

@@ -6,11 +6,10 @@ import { Header } from '@/widgets/header/ui/header';
 import { Footer } from '@/widgets/footer/ui/footer';
 import { Modal } from '@/shared/ui/modal/modal';
 import { useModal } from '@/features/modal/lib/use-modal';
+import { OrderForm } from '@/features/order-form/ui/order-form';
 
 function ModalHost() {
   const orderModal = useModal('order');
-  const confirmModal = useModal('confirm');
-  const infoModal = useModal('info');
 
   return (
     <>
@@ -20,31 +19,7 @@ function ModalHost() {
             showCloseButton
             ariaLabel="Оформление заказа"
           >
-            <h2>Оформление заказа</h2>
-            <p>Здесь будет форма заказа</p>
-            <button onClick={orderModal.close}>Закрыть</button>
-          </Modal>
-
-          <Modal
-            isOpen={confirmModal.isOpen}
-            onClose={confirmModal.close}
-            showCloseButton
-            ariaLabel="Подтверждение"
-          >
-            <h2>Подтверждение</h2>
-            <p>Вы уверены в своем действии?</p>
-            <button onClick={confirmModal.close}>Закрыть</button>
-          </Modal>
-
-          <Modal
-            isOpen={infoModal.isOpen}
-            onClose={infoModal.close}
-            showCloseButton
-            ariaLabel="Информация"
-          >
-            <h2>Информация</h2>
-            <p>Полезная информация для пользователя</p>
-            <button onClick={infoModal.close}>Закрыть</button>
+           <OrderForm onCancel={orderModal.close}/>
           </Modal>
     </>
   );

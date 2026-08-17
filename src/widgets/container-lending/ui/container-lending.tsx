@@ -5,6 +5,7 @@ import { Card } from "@/shared/model/types";
 import { ConteinerCanvas } from "@/shared/ui/conteiner-canvas";
 import { useRefsMap } from "@/shared/lib/hooks/use-refs-map";
 import { useCart } from "@/features/cart/useCart";
+import { Button } from "@/shared/ui/button/button";
 export const ContainerLending = ({ cards }: { cards: Card[] }) => {
   const { addItem, getQuantityInCart, increment, decrement } = useCart();
   const keys = cards.map(c => String(c.id));
@@ -31,19 +32,26 @@ export const ContainerLending = ({ cards }: { cards: Card[] }) => {
                 ref={refsMap.get(String(card.id))!}
                 style={{ position: "relative" }}
               />
-              <div className={styles["card-wrapper-text"]}>
+               <div className={styles["card-wrapper-text"]}>
                 <h3>{card.title}</h3>
                 <p className={styles["card-wrapper-text-description"]}>{card.description}</p>
                 <p className={styles["card-wrapper-text-price"]}>{card.price} ₽</p>
-                {
-                  !!quantity &&
+                {!!quantity && (
                   <div className={styles["card-wrapper-text-quantity"]}>
-                    { <button onClick={() => decrement(card.id)}>-</button>}<p>{quantity}</p><button onClick={() => increment(card.id)}>+</button>
+                    <Button variant="quantity" onClick={() => decrement(card.id)}>
+                      -
+                    </Button>
+                    <p>{quantity}</p>
+                    <Button variant="quantity" onClick={() => increment(card.id)}>
+                      +
+                    </Button>
                   </div>
-                }
-                {!quantity && <button onClick={() => addItem(card)} className={styles["card-wrapper-text-btn"]}>
-                  Добавить в корзину
-                </button>}
+                )}
+                {!quantity && (
+                  <Button fullWidth onClick={() => addItem(card)}>
+                    Добавить в корзину
+                  </Button>
+                )}
               </div>
             </div>
           )

@@ -4,6 +4,8 @@ import { useFiltersForm } from "../hooks/useFiltersForm";
 import { Controller } from "react-hook-form";
 import styles from "./filters.module.css";
 import { TasteCheckboxes } from "./taste-checkbox";
+import { Input } from "@/shared/ui/input/input";
+import { Button } from "@/shared/ui/button/button";
 
 const TASTES = [
   'абрикос', 'ананас', 'арбуз', 'банан', 'белый шоколад', 'бергамот', 'голубика', 'грейпфрут', 'изюм', 'имбирь', 'инжир', 'киви', 'кленовый сироп', 'клюква', 'красный апельсин', 'крем-брюле', 'лайм', 'личи', 'манго', 'маракуйя', 'марципан', 'матча', 'мёд', 'миндаль', 'попкорн', 'роза', 'розовый перец', 'ром', 'тирамису', 'тыква', 'чай', 'чёрная смородина', 'чили'
@@ -16,21 +18,20 @@ export const Filters = ({ onApply }: { onApply: (filters: AppliedFilters) => voi
   return (
     <form onSubmit={handleSubmit} className={styles.filtersForm}>
       <div className={styles.price}>
-        <h3>
-          Цена ₽
-        </h3>
+        <h3>Цена ₽</h3>
         <div className={styles.fields}>
           <Controller
             name="priceFrom"
             control={control}
             render={({ field }) => (
-              <input
+              <Input
                 type="number"
                 value={field.value}
                 onChange={(e) => field.onChange(e)}
-                onBlur={handlePriceBlur('priceFrom')}
-                onFocus={handlePriceFocus('priceFrom')}
+                onBlur={handlePriceBlur("priceFrom")}
+                onFocus={handlePriceFocus("priceFrom")}
                 ref={field.ref}
+                style={{ width: "100px" }}
               />
             )}
           />
@@ -38,13 +39,14 @@ export const Filters = ({ onApply }: { onApply: (filters: AppliedFilters) => voi
             name="priceTo"
             control={control}
             render={({ field }) => (
-              <input
+              <Input
                 type="number"
                 value={field.value}
                 onChange={(e) => field.onChange(e)}
-                onBlur={handlePriceBlur('priceTo')}
-                onFocus={handlePriceFocus('priceTo')}
+                onBlur={handlePriceBlur("priceTo")}
+                onFocus={handlePriceFocus("priceTo")}
                 ref={field.ref}
+                style={{ width: "100px" }}
               />
             )}
           />
@@ -65,8 +67,10 @@ export const Filters = ({ onApply }: { onApply: (filters: AppliedFilters) => voi
         />
       </fieldset>
       <div className={styles["buttons"]}>
-        <button type="submit" className={styles["button"]}>Применить</button>
-        <button type="button" onClick={handleReset} className={styles["button"]}>Сбросить</button>
+        <Button type="submit">Применить</Button>
+        <Button type="button" onClick={handleReset} variant="secondary">
+          Сбросить
+        </Button>
       </div>
     </form>
   );

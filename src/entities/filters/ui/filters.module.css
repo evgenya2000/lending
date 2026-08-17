@@ -14,29 +14,6 @@
 .fields {
     display: flex;
     gap: 4px;
-
-    &>input {
-        color: #6b6b6b;
-        width: 100px;
-        height: 30px;
-        padding: 4px 8px;
-        font-size: 16px;
-        border: 1.5px solid #dcdcdc;
-        transition: all 0.3s ease;
-    }
-
-    &>input:focus-visible {
-        outline: none;
-        border-color: #8e8e8e;
-        color: #000;
-        background: #f0f0f0;
-    }
-
-    &>input:hover {
-        border-color: #8e8e8e;
-        color: #000;
-        background: #f0f0f0;
-    }
 }
 
 .fieldset {
@@ -97,22 +74,4 @@
 .buttons {
     display: flex;
     gap: 8px;
-}
-
-.button {
-    width: max-content;
-    height: 36px;
-    padding: 0 16px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #fff;
-    background-color: #96669A;
-    border-radius: 14px;
-    border: none;
-    transition: all 0.3s ease;
-}
-
-.button:hover {
-    background-color: #5C405E;
-    cursor: pointer;
 }

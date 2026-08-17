@@ -1,0 +1,71 @@
+.button {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #96669a;
+  border-radius: 14px;
+  border: none;
+  padding: 0 16px;
+  height: 36px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #5c405e;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Варианты */
+.secondary {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: #bdbdbd;
+}
+
+.quantity {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #96669a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity:hover:not(:disabled) {
+  background-color: #5c405e;
+}
+
+.delete {
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  color: #ff7171;
+  padding: 0;
+  border-radius: 0;
+}
+
+.delete:hover:not(:disabled) {
+  color: #e86568;
+  background: none;
+}
+
+.fullWidth {
+  width: 100%;
+}

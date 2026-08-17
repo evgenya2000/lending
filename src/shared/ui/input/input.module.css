@@ -1,0 +1,23 @@
+.input {
+  color: #6b6b6b;
+  height: 30px;
+  padding: 4px 8px;
+  font-size: 16px;
+  border: 1.5px solid #dcdcdc;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: #8e8e8e;
+  color: #000;
+  background: #f0f0f0;
+}
+
+.input:hover {
+  border-color: #8e8e8e;
+  color: #000;
+  background: #f0f0f0;
+}

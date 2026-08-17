@@ -1,5 +1,4 @@
-// src/shared/ui/modal/modal.tsx
-'use client';
+   'use client';
 
 import { createPortal } from 'react-dom';
 import styles from './modal.module.css';
