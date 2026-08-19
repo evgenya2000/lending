@@ -11,12 +11,10 @@ const DEFAULT_COLORS = {
   Center: '#ffffff',
 };
 
-// Тайпгард для Object3D → Mesh
 function isMesh(object: THREE.Object3D): object is THREE.Mesh {
   return object.type === 'Mesh';
 }
 
-// Тайпгард для материала, поддерживающего color и map
 function isColorableMaterial(material: THREE.Material): material is (THREE.MeshStandardMaterial | THREE.MeshPhongMaterial) {
   return 'color' in material && 'map' in material;
 }
@@ -33,7 +31,9 @@ export function Macaron({
   const ref = useRef<THREE.Group>(null);
   const { scene } = useGLTF('./macaron_conf1.glb');
 
-  const finalColors = { ...DEFAULT_COLORS, ...colors };
+  const topColor = colors?.Top ?? DEFAULT_COLORS.Top;
+  const bottomColor = colors?.Bottom ?? DEFAULT_COLORS.Bottom;
+  const centerColor = colors?.Center ?? DEFAULT_COLORS.Center;
 
   const coloredScene = useMemo(() => {
     const cloned = scene.clone();
@@ -44,20 +44,22 @@ export function Macaron({
         if (partName === 'Top' || partName === 'Bottom' || partName === 'Center') {
           const material = child.material;
 
-          // Обрабатываем как одиночный материал, так и массив
           const processMaterial = (mat: THREE.Material) => {
             if (isColorableMaterial(mat)) {
               const newMat = mat.clone();
               newMat.map = null;
               newMat.needsUpdate = true;
-              newMat.color.set(finalColors[partName as keyof typeof finalColors]);
+              newMat.color.set(
+                partName === 'Top' ? topColor :
+                partName === 'Bottom' ? bottomColor :
+                centerColor
+              );
               return newMat;
             }
-            return mat; // если не подходит, оставляем как есть
+            return mat;
           };
 
           if (Array.isArray(material)) {
-            // Заменяем все материалы в массиве (или можно заменить только первый)
             child.material = material.map(processMaterial);
           } else {
             child.material = processMaterial(material);
@@ -67,15 +69,16 @@ export function Macaron({
     });
 
     return cloned;
-  }, [scene, finalColors]);
+  }, [scene, topColor, bottomColor, centerColor]);
 
+  // Очистка материалов при размонтировании
   useEffect(() => {
     return () => {
       coloredScene.traverse((child) => {
         if (isMesh(child)) {
           const material = child.material;
           if (Array.isArray(material)) {
-            material.forEach(m => m.dispose());
+            material.forEach((mat) => mat.dispose());
           } else {
             material.dispose();
           }

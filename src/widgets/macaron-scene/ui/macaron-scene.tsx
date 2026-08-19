@@ -1,5 +1,7 @@
 "use client";
+
 import { OrbitControls, PerspectiveCamera, Stage, View } from "@react-three/drei";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { Macaron } from "@/entities/macaron/ui/macaron";
 import { MacaronSceneConfig } from "@/shared/model/types";
 
@@ -10,13 +12,31 @@ export const MacaronScene = ({
 }: {
   config: MacaronSceneConfig;
   id: string;
-  track: React.RefObject<HTMLElement>;
+  track: RefObject<HTMLElement>;
 }) => {
   const { camera: cameraConfig, environment, light, macaronConfig } = config;
+  const controlsRef = useRef<any>(null);
+  const [trackReady, setTrackReady] = useState(false);
+
+  // Ждём, когда ref-элемент появится в DOM, чтобы корректно подключить OrbitControls
+  useEffect(() => {
+    if (track.current) {
+      setTrackReady(true);
+    }
+  }, [track]);
+
+  // Настраиваем touch-action после монтирования контролов
+  useEffect(() => {
+    if (trackReady && controlsRef.current && track.current) {
+      const controls = controlsRef.current;
+      if (controls.domElement) {
+        controls.domElement.style.touchAction = 'pan-y';
+      }
+    }
+  }, [trackReady, track]);
 
   return (
     <View key={id} track={track}>
-      {/* Камера внутри View, становится дефолтной для этого View */}
       <PerspectiveCamera
         makeDefault
         fov={cameraConfig?.fov ?? 45}
@@ -39,9 +59,14 @@ export const MacaronScene = ({
         />
       </Stage>
 
-      {/* OrbitControls управляет камерой этого View и слушает события только внутри track */}
-      {track.current && (
-        <OrbitControls makeDefault domElement={track.current} enableZoom={false}/>
+      {trackReady && track.current && (
+        <OrbitControls
+          ref={controlsRef}
+          makeDefault
+          domElement={track.current}
+          enableZoom={false}
+          enablePan={false}
+        />
       )}
     </View>
   );
