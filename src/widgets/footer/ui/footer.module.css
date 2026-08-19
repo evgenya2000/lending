@@ -12,6 +12,7 @@
 
 .wrapper-icons {
     display: flex;
+    align-items: center;
     gap: 8px;
 
     a {
@@ -25,19 +26,33 @@
         }
     }
 
-    a:first-child {
+    a:nth-child(2) {
         svg:hover {
             color: #24A1CA;
         }
     }
-    a:nth-child(2) {
+    a:nth-child(3) {
         svg:hover {
             color: #0E75FE;
         }
     }
-    a:nth-child(3) {
+    a:nth-child(4) {
         svg:hover {
             color: #FF7171;
         }
     }
+    a:nth-child(5) {
+        svg:hover {
+            color: #000000;
+        }
+    }
+}
+
+.copy-message {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.copy-message.visible {
+  opacity: 1;
 }
