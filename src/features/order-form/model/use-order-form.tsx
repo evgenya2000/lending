@@ -1,11 +1,11 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 
 export interface OrderFormValues {
   fullName: string;
   phone: string;
   deliveryMethod: 'courier' | 'post';
   deliveryAddress: string;
-  postalCode?: string; // необязательное, показывается только для почты
+  postalCode?: string;
   paymentMethod: 'card' | 'sbp';
 }
 
@@ -17,9 +17,9 @@ export const useOrderForm = ({ onSuccess }: UseOrderFormOptions = {}) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
     reset,
-    watch,
   } = useForm<OrderFormValues>({
     defaultValues: {
       fullName: '',
@@ -29,10 +29,18 @@ export const useOrderForm = ({ onSuccess }: UseOrderFormOptions = {}) => {
       postalCode: '',
       paymentMethod: 'card',
     },
+    shouldUnregister: true,      // автоматически удаляет скрытые поля из состояния
   });
 
+  // Безопасное получение значения deliveryMethod через useWatch
+  const deliveryMethod = useWatch({
+    control,
+    name: 'deliveryMethod',
+  });
+
+  const isPost = deliveryMethod === 'post';
+
   const onSubmit: SubmitHandler<OrderFormValues> = async (data) => {
-    // Имитация отправки на сервер
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log('Order data:', data);
     reset();
@@ -44,6 +52,7 @@ export const useOrderForm = ({ onSuccess }: UseOrderFormOptions = {}) => {
     handleSubmit: handleSubmit(onSubmit),
     errors,
     isSubmitting,
-    watch,
+    isPost,
+    control,
   };
 };
