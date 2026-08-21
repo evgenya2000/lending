@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useRef, useCallback, useState, useEffect } from 'react';
+import { useRef, useCallback } from 'react';
 import { AppliedFilters, FilterFormValues } from '@/shared/model/types';
 
 const defaultValues: FilterFormValues = {
@@ -13,13 +13,21 @@ export const useFiltersForm = (onFilterSubmit: (filters: AppliedFilters) => void
     defaultValues: defaultValues,
   });
 
-  // Рефы для сохранения значений на момент получения фокуса
   const previousFrom = useRef('0');
   const previousTo = useRef('');
 
-  const [resetTriggered, setResetTriggered] = useState(false);
+  // Применить текущие значения формы
+  const applyFilters = useCallback(() => {
+    const data = getValues();
+    const from = parseFloat(data.priceFrom);
+    const to = parseFloat(data.priceTo);
+    onFilterSubmit?.({
+      priceFrom: isNaN(from) ? undefined : from,
+      priceTo: isNaN(to) ? undefined : to,
+      tastes: [...data.tastes],
+    });
+  }, [getValues, onFilterSubmit]);
 
-  // Проверка, можно ли оставить введённое значение
   const isValidPriceUpdate = (
     newValue: string,
     field: 'priceFrom' | 'priceTo',
@@ -32,7 +40,6 @@ export const useFiltersForm = (onFilterSubmit: (filters: AppliedFilters) => void
     return field === 'priceFrom' ? num <= other : num >= other;
   };
 
-  // Обработчик blur с валидацией и откатом при необходимости
   const handlePriceBlur = useCallback(
     (field: 'priceFrom' | 'priceTo') => () => {
       const current = getValues(field);
@@ -40,15 +47,15 @@ export const useFiltersForm = (onFilterSubmit: (filters: AppliedFilters) => void
       const otherValue = getValues(otherField);
 
       if (!isValidPriceUpdate(current, field, otherValue)) {
-        // Откат к значению, которое было при фокусе
         const previous = field === 'priceFrom' ? previousFrom.current : previousTo.current;
         setValue(field, previous, { shouldValidate: false });
       }
+      // Применяем фильтры после blur
+      applyFilters();
     },
-    [getValues, setValue]
+    [getValues, setValue, applyFilters]
   );
 
-  // Сохранение значения при фокусе
   const handlePriceFocus = useCallback(
     (field: 'priceFrom' | 'priceTo') => () => {
       const value = getValues(field);
@@ -61,23 +68,26 @@ export const useFiltersForm = (onFilterSubmit: (filters: AppliedFilters) => void
     [getValues]
   );
 
-  const onSubmit = (data: FilterFormValues) => {
-    const from = parseFloat(data.priceFrom);
-    const to = parseFloat(data.priceTo);
-    onFilterSubmit?.({ priceFrom: from || undefined, priceTo: to || undefined, tastes: [...data.tastes] });
-  };
+  // Обработчик изменения вкусов – сразу применяет фильтры
+  const handleTasteChange = useCallback(
+    (newValue: string[]) => {
+      setValue('tastes', newValue, { shouldValidate: true });
+      applyFilters();
+    },
+    [setValue, applyFilters]
+  );
 
   const handleReset = () => {
-    // TODO: сделать красивое обновление в фильтрах
     reset(defaultValues);
     onFilterSubmit({ priceFrom: undefined, priceTo: undefined, tastes: [] });
   };
 
   return {
     control,
-    handleSubmit: handleSubmit(onSubmit),
+    handleSubmit: handleSubmit(() => {}),
     handlePriceBlur,
     handlePriceFocus,
-    handleReset
+    handleTasteChange,
+    handleReset,
   };
 };

@@ -11,7 +11,7 @@ export const ContainerLending = ({ cards }: { cards: Card[] }) => {
   const keys = cards.map(c => String(c.id));
   const refsMap = useRefsMap<HTMLDivElement>(keys);
 
-  if (!cards?.length) return <p>Ничего не найдено</p>;
+  if (!cards?.length) return <h3 className={styles["text"]}>Ничего не найдено</h3>;
 
   return (
     <>

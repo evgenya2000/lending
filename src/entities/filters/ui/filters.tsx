@@ -12,11 +12,11 @@ const TASTES = [
 ];
 
 export const Filters = ({ onApply }: { onApply: (filters: AppliedFilters) => void }) => {
-  const { control, handleSubmit, handlePriceBlur, handlePriceFocus, handleReset } =
+  const { control, handlePriceBlur, handlePriceFocus, handleTasteChange, handleReset } =
     useFiltersForm(onApply);
 
   return (
-    <form onSubmit={handleSubmit} className={styles.filtersForm}>
+    <form className={styles.filtersForm}>
       <div className={styles.price}>
         <h3>Цена ₽</h3>
         <div className={styles.fields}>
@@ -61,13 +61,12 @@ export const Filters = ({ onApply }: { onApply: (filters: AppliedFilters) => voi
             <TasteCheckboxes
               tastes={TASTES}
               selected={field.value}
-              onChange={field.onChange}
+              onChange={handleTasteChange}
             />
           )}
         />
       </fieldset>
       <div className={styles["buttons"]}>
-        <Button type="submit">Применить</Button>
         <Button type="button" onClick={handleReset} variant="secondary">
           Сбросить
         </Button>

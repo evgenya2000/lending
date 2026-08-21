@@ -76,3 +76,7 @@
     position: relative;
     flex-grow: 1;
 }
+
+.text {
+    padding: 40px 10px 10px 10px;
+}

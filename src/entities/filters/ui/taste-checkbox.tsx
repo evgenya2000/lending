@@ -1,4 +1,3 @@
-// TasteCheckboxes.tsx
 import { memo } from 'react';
 import styles from "./filters.module.css";
 
