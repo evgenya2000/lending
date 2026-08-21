@@ -1,6 +1,6 @@
 import { Card, CreateOrderDto, Order } from '@/shared/model/types';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
 export async function fetchCards(): Promise<Card[]> {
   const res = await fetch(`${API_URL}/cards`);
