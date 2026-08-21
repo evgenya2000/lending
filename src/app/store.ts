@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from "@/entities/cart/model/cart-slice"
+import cardsReducer from "@/entities/cards/model/cards-slice"
+import orderReducer from "@/entities/order/model/order-slice"
 
 export const makeStore = () =>
   configureStore({
     reducer: {
-      cart: cartReducer
+      cart: cartReducer,
+      cards: cardsReducer,
+      order: orderReducer,
     },
   });
 

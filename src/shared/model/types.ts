@@ -61,3 +61,17 @@ export type PositionT = number | Vector3 | [x: number, y: number, z: number] | r
 export interface CartItem extends Card {
   quantity: number;
 }
+
+export interface CreateOrderDto {
+  items: { cardId: number; quantity: number }[];
+  customerName: string;
+  customerPhone: string;
+}
+
+export interface Order {
+  id: number;
+  items: { cardId: number; quantity: number }[];
+  customerName: string;
+  customerPhone: string;
+  createdAt: string;
+}
