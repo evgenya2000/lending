@@ -1,19 +1,23 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Card, CreateOrderDto, Order } from '@/shared/model/types';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function fetchCards(): Promise<Card[]> {
-  const res = await fetch(`${API_URL}/cards`);
-  if (!res.ok) throw new Error('Не удалось загрузить карточки');
-  return res.json();
-}
+export const cardsApi = createApi({
+  reducerPath: 'cardsApi',
+  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  endpoints: (builder) => ({
+    getCards: builder.query<Card[], void>({
+      query: () => '/cards',
+    }),
+    createOrder: builder.mutation<Order, CreateOrderDto>({
+      query: (data) => ({
+        url: '/orders',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+  }),
+});
 
-export async function createOrder(data: CreateOrderDto): Promise<Order> {
-  const res = await fetch(`${API_URL}/orders`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) throw new Error('Не удалось оформить заказ');
-  return res.json();
-}
+export const { useGetCardsQuery, useCreateOrderMutation } = cardsApi;

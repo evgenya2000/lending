@@ -1,4 +1,3 @@
-// features/cart/hooks/useCart.ts
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, CartItem } from '@/shared/model/types';
 import { AppDispatch, RootState } from '@/app/store';

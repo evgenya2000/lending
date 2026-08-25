@@ -63,15 +63,23 @@ export interface CartItem extends Card {
 }
 
 export interface CreateOrderDto {
-  items: { cardId: number; quantity: number }[];
-  customerName: string;
-  customerPhone: string;
+  fullName: string;
+  phone: string;
+  deliveryMethod: 'courier' | 'post';
+  deliveryAddress: string;
+  postalCode?: string;
+  paymentMethod: 'card' | 'sbp';
+  items: { productId: number; quantity: number }[];
 }
 
 export interface Order {
   id: number;
-  items: { cardId: number; quantity: number }[];
-  customerName: string;
-  customerPhone: string;
+  fullName: string;
+  phone: string;
+  deliveryMethod: 'courier' | 'post';
+  deliveryAddress: string;
+  postalCode?: string;
+  paymentMethod: 'card' | 'sbp';
+  items: { productId: number; quantity: number }[];
   createdAt: string;
 }

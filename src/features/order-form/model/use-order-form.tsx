@@ -1,4 +1,8 @@
 import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { useCreateOrderMutation } from '@/shared/api/cards-api';
+import { selectCartItems } from '@/entities/cart/model/cart-slice';
+import { CreateOrderDto } from '@/shared/model/types';
 
 export interface OrderFormValues {
   fullName: string;
@@ -18,7 +22,7 @@ export const useOrderForm = ({ onSuccess }: UseOrderFormOptions = {}) => {
     register,
     handleSubmit,
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset,
   } = useForm<OrderFormValues>({
     defaultValues: {
@@ -29,29 +33,49 @@ export const useOrderForm = ({ onSuccess }: UseOrderFormOptions = {}) => {
       postalCode: '',
       paymentMethod: 'card',
     },
-    shouldUnregister: true,      // автоматически удаляет скрытые поля из состояния
+    shouldUnregister: true,
   });
 
-  // Безопасное получение значения deliveryMethod через useWatch
-  const deliveryMethod = useWatch({
-    control,
-    name: 'deliveryMethod',
-  });
-
+  const deliveryMethod = useWatch({ control, name: 'deliveryMethod' });
   const isPost = deliveryMethod === 'post';
 
+  const [createOrder, { isLoading, error: submitError }] = useCreateOrderMutation();
+
+  // Получаем элементы корзины из Redux
+  const cartItems = useSelector(selectCartItems);
+
   const onSubmit: SubmitHandler<OrderFormValues> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log('Order data:', data);
-    reset();
-    onSuccess?.();
+    try {
+      const items = cartItems.map((item) => ({
+        productId: item.id,   // предполагаем, что id карточки = productId
+        quantity: item.quantity,
+      }));
+
+      // Собираем полный объект заказа
+      const orderData: CreateOrderDto = {
+        fullName: data.fullName,
+        phone: data.phone,
+        deliveryMethod: data.deliveryMethod,
+        deliveryAddress: data.deliveryAddress,
+        ...(data.deliveryMethod === 'post' && { postalCode: data.postalCode }),
+        paymentMethod: data.paymentMethod,
+        items,
+      };
+
+      await createOrder(orderData).unwrap();
+      reset();
+      onSuccess?.();
+    } catch (err) {
+      console.error('Ошибка создания заказа:', err);
+    }
   };
 
   return {
     register,
     handleSubmit: handleSubmit(onSubmit),
     errors,
-    isSubmitting,
+    isSubmitting: isLoading,
+    submitError,
     isPost,
     control,
   };

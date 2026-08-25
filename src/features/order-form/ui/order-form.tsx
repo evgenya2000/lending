@@ -9,7 +9,12 @@ interface OrderFormProps {
 }
 
 export const OrderForm = ({ onSuccess, onCancel }: OrderFormProps) => {
-  const { register, handleSubmit, errors, isSubmitting, isPost } = useOrderForm({ onSuccess });
+  const { register, handleSubmit, errors, isSubmitting, submitError, isPost } = useOrderForm({ onSuccess });
+
+  // Определяем текст ошибки от сервера
+  const serverError = submitError ? 
+    (submitError as any)?.data?.message || 'Произошла ошибка при создании заказа' 
+    : null;
 
   return (
     <div className={styles['wrapper-order-form']}>
@@ -51,7 +56,7 @@ export const OrderForm = ({ onSuccess, onCancel }: OrderFormProps) => {
                   return true;
                 }
                 if (digits.length === 10) {
-                  return true; // местный номер без кода страны
+                  return true;
                 }
                 return 'Введите корректный номер телефона (например, +7 900 123-45-67)';
               },
@@ -163,6 +168,13 @@ export const OrderForm = ({ onSuccess, onCancel }: OrderFormProps) => {
             <span className={styles.error}>{errors.paymentMethod.message}</span>
           )}
         </div>
+
+        {/* Ошибка от сервера */}
+        {serverError && (
+          <div className={styles.error} role="alert">
+            {serverError}
+          </div>
+        )}
 
         {/* Кнопки */}
         <div className={styles.buttons}>
