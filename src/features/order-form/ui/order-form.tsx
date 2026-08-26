@@ -9,9 +9,8 @@ interface OrderFormProps {
 }
 
 export const OrderForm = ({ onSuccess, onCancel }: OrderFormProps) => {
-  const { register, handleSubmit, errors, isSubmitting, submitError, isPost } = useOrderForm({ onSuccess });
+  const { register, handleSubmit, errors, isSubmitting, submitError, isPost, phoneFieldProps } = useOrderForm({ onSuccess });
 
-  // Определяем текст ошибки от сервера
   const serverError = submitError ? 
     (submitError as any)?.data?.message || 'Произошла ошибка при создании заказа' 
     : null;
@@ -42,31 +41,17 @@ export const OrderForm = ({ onSuccess, onCancel }: OrderFormProps) => {
           )}
         </div>
 
-        {/* Телефон */}
+         {/* Телефон */}
         <div className={styles.field}>
           <label htmlFor="phone" className={styles.label}>Номер телефона</label>
           <Input
             id="phone"
             className={styles.input}
-            {...register('phone', {
-              required: 'Телефон обязателен',
-              validate: (value) => {
-                const digits = value.replace(/\D/g, '');
-                if (digits.length === 11 && (digits.startsWith('7') || digits.startsWith('8'))) {
-                  return true;
-                }
-                if (digits.length === 10) {
-                  return true;
-                }
-                return 'Введите корректный номер телефона (например, +7 900 123-45-67)';
-              },
-            })}
+            {...phoneFieldProps}
             placeholder="+7 900 123-45-67"
             aria-invalid={errors.phone ? 'true' : 'false'}
           />
-          {errors.phone && (
-            <span className={styles.error}>{errors.phone.message}</span>
-          )}
+          {errors.phone && <span className={styles.error}>{errors.phone.message}</span>}
         </div>
 
         {/* Способ доставки */}

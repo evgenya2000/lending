@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useCreateOrderMutation } from '@/shared/api/cards-api';
 import { selectCartItems } from '@/entities/cart/model/cart-slice';
 import { CreateOrderDto } from '@/shared/model/types';
+import { formatPhone } from '../helps/formatPhone';
 
 export interface OrderFormValues {
   fullName: string;
@@ -20,7 +21,7 @@ interface UseOrderFormOptions {
 export const useOrderForm = ({ onSuccess }: UseOrderFormOptions = {}) => {
   const {
     register,
-    handleSubmit,
+    handleSubmit: originalHandleSubmit,
     control,
     formState: { errors },
     reset,
@@ -40,21 +41,43 @@ export const useOrderForm = ({ onSuccess }: UseOrderFormOptions = {}) => {
   const isPost = deliveryMethod === 'post';
 
   const [createOrder, { isLoading, error: submitError }] = useCreateOrderMutation();
-
-  // Получаем элементы корзины из Redux
   const cartItems = useSelector(selectCartItems);
+
+  const phoneRegister = register('phone', {
+    required: 'Телефон обязателен',
+    validate: (value) => {
+      const digits = value.replace(/\D/g, '');
+      if (digits.length === 11 && digits.startsWith('7')) {
+        return true;
+      }
+      if (digits.length === 10) {
+        return true;
+      }
+      return 'Введите корректный номер телефона (например, +7 900 123-45-67)';
+    },
+  });
+
+  const phoneFieldProps = {
+    ...phoneRegister,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+      const formatted = formatPhone(e.target.value);
+      e.target.value = formatted;
+      phoneRegister.onChange(e);
+    },
+  };
 
   const onSubmit: SubmitHandler<OrderFormValues> = async (data) => {
     try {
       const items = cartItems.map((item) => ({
-        productId: item.id,   // предполагаем, что id карточки = productId
+        productId: item.id,
         quantity: item.quantity,
       }));
 
-      // Собираем полный объект заказа
+      const cleanedPhone = data.phone.replace(/\D/g, '');
+
       const orderData: CreateOrderDto = {
         fullName: data.fullName,
-        phone: data.phone,
+        phone: cleanedPhone,
         deliveryMethod: data.deliveryMethod,
         deliveryAddress: data.deliveryAddress,
         ...(data.deliveryMethod === 'post' && { postalCode: data.postalCode }),
@@ -70,13 +93,16 @@ export const useOrderForm = ({ onSuccess }: UseOrderFormOptions = {}) => {
     }
   };
 
+  const handleSubmit = originalHandleSubmit(onSubmit);
+
   return {
     register,
-    handleSubmit: handleSubmit(onSubmit),
+    handleSubmit,
     errors,
     isSubmitting: isLoading,
     submitError,
     isPost,
     control,
+    phoneFieldProps,
   };
 };
