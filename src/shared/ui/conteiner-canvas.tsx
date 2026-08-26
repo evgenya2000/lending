@@ -10,6 +10,7 @@ export const ConteinerCanvas = ({
 }) => {
   return (
     <Canvas
+      shadows={false}
       dpr={[1, 2]} 
       gl={{ antialias: true, alpha: true }}
       style={{

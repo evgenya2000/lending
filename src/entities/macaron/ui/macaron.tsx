@@ -93,5 +93,5 @@ export function Macaron({
     }
   });
 
-  return <primitive ref={ref} object={coloredScene} position={position} />;
+  return <primitive ref={ref} object={coloredScene} position={position} scale={1.75} />;
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { OrbitControls, PerspectiveCamera, Stage, View } from "@react-three/drei";
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { Environment, OrbitControls, PerspectiveCamera, View } from "@react-three/drei";
+import { useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { Macaron } from "@/entities/macaron/ui/macaron";
 import { MacaronSceneConfig } from "@/shared/model/types";
 
@@ -16,17 +16,24 @@ export const MacaronScene = ({
 }) => {
   const { camera: cameraConfig, environment, light, macaronConfig } = config;
   const controlsRef = useRef<any>(null);
+  const viewRef = useRef<any>(null);
   const [trackReady, setTrackReady] = useState(false);
 
-  // Ждём, когда ref-элемент появится в DOM, чтобы корректно подключить OrbitControls
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (track.current) {
       setTrackReady(true);
     }
   }, [track]);
 
-  // Настраиваем touch-action после монтирования контролов
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (trackReady && viewRef.current && track.current) {
+      requestAnimationFrame(() => {
+        viewRef.current?.update?.();
+      });
+    }
+  }, [trackReady, track]);
+
+  useLayoutEffect(() => {
     if (trackReady && controlsRef.current && track.current) {
       const controls = controlsRef.current;
       if (controls.domElement) {
@@ -36,7 +43,7 @@ export const MacaronScene = ({
   }, [trackReady, track]);
 
   return (
-    <View key={id} track={track}>
+    <View ref={viewRef} key={id} track={track}>
       <PerspectiveCamera
         makeDefault
         fov={cameraConfig?.fov ?? 45}
@@ -45,19 +52,12 @@ export const MacaronScene = ({
         position={cameraConfig?.position ?? [0, 0, 5]}
       />
 
-      <Stage
-        environment={environment?.map || null}
-        intensity={environment?.intensity}
-        shadows={false}
-      >
-        <ambientLight intensity={4} />
-        <pointLight position={light.position} intensity={light.intensity} />
-        <Macaron
-          colors={macaronConfig.colors}
-          position={macaronConfig.position}
-          speed={macaronConfig.speed}
-        />
-      </Stage>
+      <Macaron
+        colors={macaronConfig.colors}
+        position={macaronConfig.position}
+        speed={macaronConfig.speed}
+      />
+      <Environment preset="studio" />
 
       {trackReady && track.current && (
         <OrbitControls
