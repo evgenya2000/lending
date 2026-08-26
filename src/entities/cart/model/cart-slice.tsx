@@ -21,7 +21,7 @@ const cartSlice = createSlice({
                 const newItem = {
                     ...structuredClone(action.payload),
                     quantity: 1,
-                } as any;  // или as any
+                } as any;
 
                 state.items.push(newItem);
             }

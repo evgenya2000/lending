@@ -6,14 +6,21 @@ import styles from "./filters.module.css";
 import { TasteCheckboxes } from "./taste-checkbox";
 import { Input } from "@/shared/ui/input/input";
 import { Button } from "@/shared/ui/button/button";
-
-const TASTES = [
-  'абрикос', 'ананас', 'арбуз', 'банан', 'белый шоколад', 'бергамот', 'голубика', 'грейпфрут', 'изюм', 'имбирь', 'инжир', 'киви', 'кленовый сироп', 'клюква', 'красный апельсин', 'крем-брюле', 'лайм', 'личи', 'манго', 'маракуйя', 'марципан', 'матча', 'мёд', 'миндаль', 'попкорн', 'роза', 'розовый перец', 'ром', 'тирамису', 'тыква', 'чай', 'чёрная смородина', 'чили'
-];
+import { useGetTastesQuery } from "@/shared/api/cards-api";
 
 export const Filters = ({ onApply }: { onApply: (filters: AppliedFilters) => void }) => {
   const { control, handlePriceBlur, handlePriceFocus, handleTasteChange, handleReset } =
     useFiltersForm(onApply);
+
+  const { data: tastes = [], isLoading, isError } = useGetTastesQuery();
+
+  if (isLoading) {
+    return <div className={styles.filtersForm}>Загрузка вкусов...</div>;
+  }
+
+  if (isError) {
+    return <div className={styles.filtersForm}>Ошибка загрузки вкусов</div>;
+  }
 
   return (
     <form className={styles.filtersForm}>
@@ -59,7 +66,7 @@ export const Filters = ({ onApply }: { onApply: (filters: AppliedFilters) => voi
           control={control}
           render={({ field }) => (
             <TasteCheckboxes
-              tastes={TASTES}
+              tastes={tastes}
               selected={field.value}
               onChange={handleTasteChange}
             />

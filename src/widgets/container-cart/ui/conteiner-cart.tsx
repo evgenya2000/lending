@@ -13,15 +13,9 @@ import { Button } from '@/shared/ui/button/button';
 export const ContainerCart = () => {
     const { items, totalPrice, increment, decrement, removeItem, clearCart, totalQuantity } = useCart();
     const orderModal = useModal('order');
-    /* const confirmModal = useModal('confirm');
-    const infoModal = useModal('info'); */
 
     const keys = items.map(c => String(c.id));
     const refsMap = useRefsMap<HTMLDivElement>(keys);
-
-    /* const handleClearCart = () => {
-        confirmModal.open();
-    }; */
 
     const handleCheckout = () => {
         orderModal.open();
