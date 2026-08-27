@@ -13,6 +13,9 @@ export const cardsApi = createApi({
     getTastes: builder.query<string[], void>({
       query: () => '/cards/tastes',
     }),
+    getOrders: builder.query<Order[], void>({
+      query: () => '/orders',
+    }),
     createOrder: builder.mutation<Order, CreateOrderDto>({
       query: (data) => ({
         url: '/orders',
@@ -23,4 +26,4 @@ export const cardsApi = createApi({
   }),
 });
 
-export const { useGetCardsQuery, useGetTastesQuery, useCreateOrderMutation } = cardsApi;
+export const { useGetCardsQuery, useGetTastesQuery, useGetOrdersQuery, useCreateOrderMutation } = cardsApi;

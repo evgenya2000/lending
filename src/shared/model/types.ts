@@ -26,7 +26,7 @@ export interface MacaronSceneConfig {
   camera: CameraConfig;
   environment: EnvironmentConfig;
   light: LightConfig;
-  macaronConfig: MacaronVisualConfig; // вложенная конфигурация самого макарона
+  macaronConfig: MacaronVisualConfig;
 }
 
 export interface CameraConfig {
