@@ -8,7 +8,7 @@ export const ContainerOrders = ({ orders }: { orders: Order[] | undefined}) => {
 
   return (
     <>
-    <h1>Текущие заказы</h1>
+    <h3>Текущие заказы</h3>
       {console.log(orders)}
     </>
   );

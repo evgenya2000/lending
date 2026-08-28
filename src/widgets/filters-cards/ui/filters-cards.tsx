@@ -1,14 +1,17 @@
 "use client";
+
 import { AppliedFilters } from "@/shared/model/types";
-import { useFiltersForm } from "../hooks/useFiltersForm";
+import styles from "./filters-cards.module.css"
+import { useGetTastesQuery } from "@/shared/api/cards-api";
 import { Controller } from "react-hook-form";
-import styles from "./filters.module.css";
-import { TasteCheckboxes } from "./taste-checkbox";
 import { Input } from "@/shared/ui/input/input";
 import { Button } from "@/shared/ui/button/button";
-import { useGetTastesQuery } from "@/shared/api/cards-api";
+import { TasteCheckboxes } from "@/entities/filters-cards/ui/taste-checkbox";
+import { useFiltersForm } from "@/entities/filters-cards/hooks/useFiltersForm";
 
-export const Filters = ({ onApply }: { onApply: (filters: AppliedFilters) => void }) => {
+
+export const FiltersCards = (
+  {onApply}: {onApply: (filters: AppliedFilters) => void}) => {
   const { control, handlePriceBlur, handlePriceFocus, handleTasteChange, handleReset } =
     useFiltersForm(onApply);
 

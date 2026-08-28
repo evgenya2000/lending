@@ -1,0 +1,26 @@
+.filtersForm {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0 0 30px;
+    gap: 20px;
+}
+
+.price {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.fields {
+    display: flex;
+    gap: 4px;
+}
+
+.fieldset {
+    border: none;
+}
+
+.buttons {
+    display: flex;
+    gap: 8px;
+}

@@ -2,15 +2,15 @@
 
 import { useRefsMap } from '@/shared/lib/hooks/use-refs-map';
 import { Card, CartItem } from '@/shared/model/types';
-import styles from "./conteiner-cart.module.css"
-import { ConteinerCanvas } from '@/shared/ui/conteiner-canvas';
+import styles from "./cart.module.css";
+import { ConteinerCanvas } from '@/shared/ui/conteiner-canvas/conteiner-canvas';
 import { MacaronScene } from '@/widgets/macaron-scene/ui/macaron-scene';
 import { useCart } from '@/features/cart/useCart';
 import { Delete } from '@/shared/icons/delete';
 import { useModal } from '@/features/modal/lib/use-modal';
 import { Button } from '@/shared/ui/button/button';
 
-export const ContainerCart = () => {
+export const Cart = () => {
     const { items, totalPrice, increment, decrement, removeItem, clearCart, totalQuantity } = useCart();
     const orderModal = useModal('order');
 

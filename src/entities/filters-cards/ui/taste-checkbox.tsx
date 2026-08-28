@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import styles from "./filters.module.css";
+import styles from "./taste-checkbox.module.css"
 
 export const TasteCheckboxes = memo(({ 
   tastes, 

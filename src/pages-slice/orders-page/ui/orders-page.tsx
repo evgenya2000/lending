@@ -1,7 +1,7 @@
 'use client';
 
 import { useGetOrdersQuery } from '@/shared/api/cards-api';
-import { ContainerOrders } from '@/widgets/container-orders/container-orders';
+import { Orders } from '@/widgets/orders/orders';
 
 export default function OrdersPage() {
   const { data: orders, isLoading, isError, error } = useGetOrdersQuery();
@@ -20,7 +20,7 @@ export default function OrdersPage() {
 
   return (
     <div>
-      <ContainerOrders orders={orders}/>
+      <Orders orders={orders}/>
     </div>
   );
 }

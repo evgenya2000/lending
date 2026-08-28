@@ -1,12 +1,12 @@
 "use client";
-import styles from "./container-lending.module.css";
+import styles from "./lending.module.css";
 import { MacaronScene } from "@/widgets/macaron-scene/ui/macaron-scene";
 import { Card } from "@/shared/model/types";
-import { ConteinerCanvas } from "@/shared/ui/conteiner-canvas";
+import { ConteinerCanvas } from '@/shared/ui/conteiner-canvas/conteiner-canvas';
 import { useRefsMap } from "@/shared/lib/hooks/use-refs-map";
 import { useCart } from "@/features/cart/useCart";
 import { Button } from "@/shared/ui/button/button";
-export const ContainerLending = ({ cards }: { cards: Card[] }) => {
+export const Lending = ({ cards }: { cards: Card[] }) => {
   const { addItem, getQuantityInCart, increment, decrement } = useCart();
   const keys = cards.map(c => String(c.id));
   const refsMap = useRefsMap<HTMLDivElement>(keys);
