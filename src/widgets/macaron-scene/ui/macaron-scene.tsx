@@ -57,7 +57,7 @@ export const MacaronScene = ({
         position={macaronConfig.position}
         speed={macaronConfig.speed}
       />
-      <Environment preset="studio" />
+      <Environment preset="studio" /> {/* down, lobby, park */}
 
       {trackReady && track.current && (
         <OrbitControls
