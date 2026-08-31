@@ -18,11 +18,11 @@ export const FiltersCards = (
   const { data: tastes = [], isLoading, isError } = useGetTastesQuery();
 
   if (isLoading) {
-    return <div className={styles.filtersForm}>Загрузка вкусов...</div>;
+    return <h3 className={styles.filtersForm}>Загрузка вкусов...</h3>;
   }
 
   if (isError) {
-    return <div className={styles.filtersForm}>Ошибка загрузки вкусов</div>;
+    return <h3 className={styles.filtersForm}>Ошибка загрузки вкусов</h3>;
   }
 
   return (

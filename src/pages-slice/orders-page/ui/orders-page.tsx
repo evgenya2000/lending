@@ -1,26 +1,31 @@
 'use client';
 
 import { useGetOrdersQuery } from '@/shared/api/cards-api';
+import { ContainerMain } from '@/widgets/main/ui/conteiner-main';
 import { Orders } from '@/widgets/orders/orders';
 
 export default function OrdersPage() {
   const { data: orders, isLoading, isError, error } = useGetOrdersQuery();
 
   if (isLoading) {
-    return <div >Загрузка заказов...</div>;
+    return <ContainerMain
+      allWidth={<h3 style={{padding: "40px 30px 20px;"}}>Загрузка заказов...</h3>}
+      />
   }
 
   if (isError) {
     return (
-      <div >
+      <ContainerMain
+      allWidth={<h3 style={{padding: "40px 30px 20px;"}}>
         Ошибка: {error instanceof Error ? error.message : 'Неизвестная ошибка'}
-      </div>
+      </h3>}
+      />
     );
   }
 
   return (
-    <div>
-      <Orders orders={orders}/>
-    </div>
+    <ContainerMain
+      allWidth={<Orders orders={orders}/>}
+    />
   );
 }

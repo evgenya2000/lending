@@ -2,7 +2,7 @@
 import styles from "./lending.module.css";
 import { MacaronScene } from "@/widgets/macaron-scene/ui/macaron-scene";
 import { Card } from "@/shared/model/types";
-import { ConteinerCanvas } from '@/shared/ui/conteiner-canvas/conteiner-canvas';
+import { ContainerCanvas } from '@/shared/ui/container-canvas/container-canvas';
 import { useRefsMap } from "@/shared/lib/hooks/use-refs-map";
 import { useCart } from "@/features/cart/useCart";
 import { Button } from "@/shared/ui/button/button";
@@ -15,12 +15,12 @@ export const Lending = ({ cards }: { cards: Card[] }) => {
 
   return (
     <>
-      <ConteinerCanvas
+      <ContainerCanvas
       >
         {cards.map((card: Card) => (
           <MacaronScene key={card.id} config={card.macaronConfig} id={String(card.id)} track={refsMap.get(String(card.id))!} />
         ))}
-      </ConteinerCanvas>
+      </ContainerCanvas>
 
       <div className={styles.grid}>
         {cards.map((card: Card) => {

@@ -20,9 +20,8 @@ export const OrderForm = ({ onSuccess, onCancel }: OrderFormProps) => {
       <h3>Оформление заказа</h3>
       <p>Пожалуйста, заполните форму</p>
       <form onSubmit={handleSubmit} noValidate className={styles.form}>
-        {/* ФИО */}
         <div className={styles.field}>
-          <label htmlFor="fullName" className={styles.label}>ФИО</label>
+          <label htmlFor="fullName" className={styles.label}>Имя</label>
           <Input
             id="fullName"
             className={styles.input}
@@ -32,8 +31,7 @@ export const OrderForm = ({ onSuccess, onCancel }: OrderFormProps) => {
                 value: 3,
                 message: 'Минимум 3 символа',
               },
-            })}
-            placeholder="Иванов Иван Иванович"
+            })} 
             aria-invalid={errors.fullName ? 'true' : 'false'}
           />
           {errors.fullName && (

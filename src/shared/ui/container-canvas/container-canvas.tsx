@@ -3,7 +3,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense, type ReactNode } from "react";
 
-export const ConteinerCanvas = ({
+export const ContainerCanvas = ({
   children,
 }: {
   children: ReactNode;

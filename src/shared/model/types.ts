@@ -82,4 +82,6 @@ export interface Order {
   paymentMethod: 'card' | 'sbp';
   items: { productId: number; quantity: number }[];
   createdAt: string;
+  status: 'PENDING';
+  issuedAt?: string;
 }

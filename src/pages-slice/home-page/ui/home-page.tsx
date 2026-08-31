@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <ContainerMain
       left={<FiltersCards onApply={applyFilters} />}
-      right={isLoading ? <div style={{padding: "40px 10px 10px 10px"}}>Загрузка...</div> : <Lending cards={filteredCards} />}
+      right={isLoading ? <h3 style={{padding: "40px 10px 10px 10px"}}>Загрузка...</h3> : <Lending cards={filteredCards} />}
     />
   );
 }

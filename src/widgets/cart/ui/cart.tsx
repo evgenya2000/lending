@@ -3,7 +3,7 @@
 import { useRefsMap } from '@/shared/lib/hooks/use-refs-map';
 import { Card, CartItem } from '@/shared/model/types';
 import styles from "./cart.module.css";
-import { ConteinerCanvas } from '@/shared/ui/conteiner-canvas/conteiner-canvas';
+import { ContainerCanvas } from '@/shared/ui/container-canvas/container-canvas';
 import { MacaronScene } from '@/widgets/macaron-scene/ui/macaron-scene';
 import { useCart } from '@/features/cart/useCart';
 import { Delete } from '@/shared/icons/delete';
@@ -23,7 +23,7 @@ export const Cart = () => {
 
     if (items.length === 0) {
         return (
-            <div className={styles["conteiner"]}>
+            <div className={styles["container"]}>
                 <h3>Корзина пуста</h3>
                 <p>Добавьте товары из каталога</p>
             </div>
@@ -31,12 +31,12 @@ export const Cart = () => {
     }
 
     return (
-        <div className={styles["conteiner"]}>
-            <ConteinerCanvas>
+        <div className={styles["container"]}>
+            <ContainerCanvas>
                 {items.map((item: Card) => (
                     <MacaronScene key={item.id} config={item.macaronConfig} id={String(item.id)} track={refsMap.get(String(item.id))!} />
                 ))}
-            </ConteinerCanvas>
+            </ContainerCanvas>
             <h3>Ваша корзина</h3>
             <ul >
                 {items.map((item: CartItem) => (
