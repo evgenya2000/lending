@@ -2,44 +2,54 @@
 
 import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 
-export interface ModalContextType {
-    modals: Record<string, boolean>;
-    openModal: (id: string) => void;
-    closeModal: (id: string) => void;
-    toggleModal: (id: string) => void;
+export interface ModalState {
+  isOpen: boolean;
+  data?: any;
 }
 
-// Создаем контекст с типом
+export interface ModalContextType {
+  modals: Record<string, ModalState>;
+  openModal: (id: string, data?: any) => void;
+  closeModal: (id: string) => void;
+  toggleModal: (id: string) => void;
+}
+
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
-    const [modals, setModals] = useState<Record<string, boolean>>({});
+  const [modals, setModals] = useState<Record<string, ModalState>>({});
 
-    const openModal = useCallback((id: string) => {
-        setModals(prev => ({ ...prev, [id]: true }));
-    }, []);
+  const openModal = useCallback((id: string, data?: any) => {
+    setModals(prev => ({ ...prev, [id]: { isOpen: true, data } }));
+  }, []);
 
-    const closeModal = useCallback((id: string) => {
-        setModals(prev => ({ ...prev, [id]: false }));
-    }, []);
+  const closeModal = useCallback((id: string) => {
+    setModals(prev => ({ ...prev, [id]: { isOpen: false, data: undefined } }));
+  }, []);
 
-    const toggleModal = useCallback((id: string) => {
-        setModals(prev => ({ ...prev, [id]: !prev[id] }));
-    }, []);
+  const toggleModal = useCallback((id: string) => {
+    setModals(prev => ({
+      ...prev,
+      [id]: {
+        isOpen: !prev[id]?.isOpen,
+        data: prev[id]?.data,
+      },
+    }));
+  }, []);
 
-    const value = { modals, openModal, closeModal, toggleModal };
+  const value = { modals, openModal, closeModal, toggleModal };
 
-    return (
-        <ModalContext.Provider value={value}>
-            {children}
-        </ModalContext.Provider>
-    );
+  return (
+    <ModalContext.Provider value={value}>
+      {children}
+    </ModalContext.Provider>
+  );
 };
 
 export const useModalContext = () => {
-    const context = useContext(ModalContext);
-    if (!context) {
-        throw new Error('useModalContext must be used within ModalProvider');
-    }
-    return context;
+  const context = useContext(ModalContext);
+  if (!context) {
+    throw new Error('useModalContext must be used within ModalProvider');
+  }
+  return context;
 };

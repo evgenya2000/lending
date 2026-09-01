@@ -7,21 +7,32 @@ import { Footer } from '@/widgets/footer/ui/footer';
 import { Modal } from '@/shared/ui/modal/modal';
 import { useModal } from '@/features/modal/lib/use-modal';
 import { OrderForm } from '@/features/order-form/ui/order-form';
+import { OrderDetails } from '@/features/order-details/ui/order-details';
 import { useGLTF } from '@react-three/drei';
 
 function ModalHost() {
   const orderModal = useModal('order');
+  const orderDetailsModal = useModal('order-details');
 
   return (
     <>
       <Modal
-            isOpen={orderModal.isOpen}
-            onClose={orderModal.close}
-            showCloseButton
-            ariaLabel="Оформление заказа"
-          >
-           <OrderForm onCancel={orderModal.close}/>
-          </Modal>
+        isOpen={orderModal.isOpen}
+        onClose={orderModal.close}
+        showCloseButton
+        ariaLabel="Оформление заказа"
+      >
+        <OrderForm onCancel={orderModal.close} />
+      </Modal>
+
+      <Modal
+        isOpen={orderDetailsModal.isOpen}
+        onClose={orderDetailsModal.close}
+        showCloseButton
+        ariaLabel="Детали заказа"
+      >
+        {orderDetailsModal.data && <OrderDetails order={orderDetailsModal.data} />}
+      </Modal>
     </>
   );
 }

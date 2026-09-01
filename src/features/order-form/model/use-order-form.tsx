@@ -18,7 +18,6 @@ interface UseOrderFormOptions {
   onSuccess?: () => void;
 }
 
-export const DELIVERY_METHOD = [""]
 
 export const useOrderForm = ({ onSuccess }: UseOrderFormOptions = {}) => {
   const {

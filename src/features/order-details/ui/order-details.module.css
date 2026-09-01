@@ -1,0 +1,164 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 1300px;
+}
+
+.container h3 {
+    padding-bottom: 24px;
+}
+
+.container h4 {
+    padding-bottom: 12px;
+    font-weight: 500;
+}
+
+.info {
+    display: flex;
+    gap: 40px;
+    padding-bottom: 24px;
+}
+
+.info-row {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.info-row:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -20px;
+    width: 1px;
+    height: 100%;
+    background-color: #ddd;
+}
+
+.info-label {
+    font-weight: 500;
+}
+
+.info-value {
+    font-size: 14px;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table td {
+    border: 1px solid #ddd;
+    border-top: none;
+    padding: 8px;
+}
+
+.table th {
+    font-weight: 500;
+    text-align: left;
+}
+
+.table td {
+    font-size: 14px;
+}
+
+.table td:last-child {
+    text-align: center;
+}
+
+.table {
+    border: none;
+}
+
+.table tr:first-child th,
+.table tr:first-child td {
+    border-top: none;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tr {
+    background-color: #fff;
+    transition: background-color 0.2ms ease;
+}
+
+.table tr:hover {
+    background-color: #FFE3E3;
+
+}
+
+.table th:first-child,
+.table td:first-child {
+    border-left: none;
+    padding-left: 0;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+    width: 110px;
+}
+
+.table td:nth-child(2) {
+    text-align: center;
+}
+
+.table th:last-child,
+.table td:last-child {
+    border-right: none;
+    width: 80px;
+}
+
+.table tfoot tr:last-child td:first-child {
+    text-align: right;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.table tfoot tr:last-child td:last-child {
+    font-weight: 500;
+    font-size: 16px
+}
+
+.copyable {
+    cursor: pointer;
+    transition: font-weight 0.2ms ease;
+}
+
+.copyable:hover {
+    font-weight: 600 !important;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead,
+.table tbody tr,
+.table tfoot {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table tbody {
+    display: block;
+    max-height: 500px;
+    overflow-y: auto;
+    width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.table tbody::-webkit-scrollbar {
+    display: none;
+}

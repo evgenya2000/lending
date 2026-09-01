@@ -37,7 +37,7 @@ export interface CameraConfig {
 }
 
 export interface EnvironmentConfig {
-  map: "apartment" | "city" | "dawn" | "forest" | "lobby" | "night" | "park" | "studio" | "sunset" | "warehouse" | Partial<EnvironmentProps> | null | undefined; 
+  map: "apartment" | "city" | "dawn" | "forest" | "lobby" | "night" | "park" | "studio" | "sunset" | "warehouse" | Partial<EnvironmentProps> | null | undefined;
   intensity: number | undefined;
 }
 
@@ -80,8 +80,15 @@ export interface Order {
   deliveryAddress: string;
   postalCode?: string;
   paymentMethod: 'card' | 'sbp';
-  items: { productId: number; quantity: number }[];
+  items: {
+    id: number,
+    orderId: number,
+    productId: number,
+    quantity: number,
+    price: string,
+    product: Card
+  }[];
   createdAt: string;
-  status: 'PENDING';
+  status: 'PENDING' | 'ASSEMBLED';
   issuedAt?: string;
 }
