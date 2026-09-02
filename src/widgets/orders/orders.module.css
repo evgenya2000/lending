@@ -1,5 +1,6 @@
 .container {
   padding: 40px 30px 20px;
+  position: relative;
 }
 
 .title {
@@ -56,4 +57,27 @@
 .table th:last-child,
 .table td:last-child {
   border-right: none;
+}
+
+.copyable {
+    cursor: pointer;
+    transition: font-weight 0.2ms ease;
+}
+
+.copyable:hover {
+    font-weight: 600 !important;
+}
+
+.copy-message {
+    position: absolute;
+    top: 40px;
+    right: 30px;
+    color: #6b6b6b;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 18px;
+}
+
+.copy-message.visible {
+    opacity: 1;
 }

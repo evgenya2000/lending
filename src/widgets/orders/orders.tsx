@@ -3,9 +3,12 @@ import { Order } from "@/shared/model/types";
 import styles from "./orders.module.css";
 import { Button } from "@/shared/ui/button/button";
 import { useModal } from "@/features/modal/lib/use-modal";
+import { useState } from "react";
+import { handleCopy } from "@/shared/lib/helps/handleCopy";
 
 export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
   const orderDetailsModal = useModal('order-details');
+  const [isCopied, setIsCopied] = useState(false);
 
   if (!orders || orders.length === 0) {
     return <div className={styles.empty}>У вас пока нет заказов.</div>;
@@ -14,6 +17,7 @@ export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Все заказы</h3>
+      <span className={`${styles["copy-message"]} ${isCopied ? styles["visible"] : ""}`}>Текст скопирован</span>
       <table className={styles.table}>
         <thead>
           <tr>
@@ -39,10 +43,16 @@ export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
                   ? new Date(order.issuedAt).toLocaleString("ru-RU")
                   : "—"}
               </td>
-              <td>{order.deliveryAddress || "—"}</td>
+              <td className={`${styles["copyable"]}`}
+                onClick={(e) => handleCopy(e, order.deliveryAddress || '—', setIsCopied)}
+                title="Нажмите, чтобы скопировать">{order.deliveryAddress || "—"}</td>
               <td>{order.deliveryMethod === "courier" ? "Курьер" : "Почта"}</td>
-              <td>{order.fullName}</td>
-              <td>{order.phone}</td>
+              <td className={`${styles["copyable"]}`}
+                onClick={(e) => handleCopy(e, order.fullName, setIsCopied)}
+                title="Нажмите, чтобы скопировать">{order.fullName}</td>
+              <td className={`${styles["copyable"]}`}
+                onClick={(e) => handleCopy(e, order.phone, setIsCopied)}
+                title="Нажмите, чтобы скопировать">{order.phone}</td>
               <td>
                 <Button
                   type="button"

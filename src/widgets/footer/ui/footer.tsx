@@ -4,24 +4,12 @@ import styles from "./footer.module.css";
 import { Vk } from "@/shared/icons/vk";
 import { Mail } from "@/shared/icons/mail";
 import { Git } from "@/shared/icons/git";
+import { handleCopy } from "@/shared/lib/helps/handleCopy";
 
 const EMAIL = "evgenya@yandex.ru";
 
 export const Footer = () => {
   const [isCopied, setIsCopied] = useState(false);
-
-  const handleCopyEmail = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    navigator.clipboard.writeText(EMAIL)
-      .then(() => {
-        setIsCopied(true);
-        setTimeout(() => setIsCopied(false), 2000);
-      })
-      .catch(() => {
-        setIsCopied(true);
-        setTimeout(() => setIsCopied(false), 2000);
-      });
-  };
 
   return (
     <footer className={styles["footer"]}>
@@ -32,12 +20,12 @@ export const Footer = () => {
         </span>
         <a href="https://t.me/@evgenia_veg"><Telegram /></a>
         <a href="https://vk.ru/id61396007"><Vk /></a>
-        <a href={`mailto:${EMAIL}`} onClick={handleCopyEmail} title="Кликните, чтобы скопировать почту">
+        <a href={`mailto:${EMAIL}`} onClick={(e) => { handleCopy<HTMLAnchorElement>(e, EMAIL, setIsCopied) }} title="Кликните, чтобы скопировать почту">
           <Mail />
         </a>
-        <a href="https://github.com/evgenya2000"><Git/></a>
+        <a href="https://github.com/evgenya2000"><Git /></a>
       </div>
-      
+
       <p>Сделано с позитивным настроением</p>
     </footer>
   );

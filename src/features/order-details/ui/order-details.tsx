@@ -2,25 +2,22 @@
 
 import { Order } from '@/shared/model/types';
 import styles from './order-details.module.css';
+import { handleCopy } from '@/shared/lib/helps/handleCopy';
+import { useState } from 'react';
 
 export const OrderDetails = ({ order }: { order: Order }) => {
+    const [isCopied, setIsCopied] = useState(false);
     if (!order) return null;
 
-    const total = order.items.reduce(
+    const totalSum = order.items.reduce(
         (sum, item) => sum + item.quantity * Number(item.price),
         0
     );
 
-    // Функция копирования текста в буфер обмена
-    const handleCopy = async (text: string) => {
-        try {
-            await navigator.clipboard.writeText(text);
-            // Можно добавить небольшую визуальную индикацию, например, alert
-            // alert('Скопировано: ' + text);
-        } catch (err) {
-            console.error('Ошибка копирования:', err);
-        }
-    };
+    const totalQuantity = order.items.reduce(
+        (sum, item) => sum + item.quantity,
+        0
+    );
 
     return (
         <div className={styles["container"]}>
@@ -45,7 +42,7 @@ export const OrderDetails = ({ order }: { order: Order }) => {
                     <div className={styles["info-label"]}>Адрес доставки:</div>
                     <div
                         className={`${styles["info-value"]} ${styles["copyable"]}`}
-                        onClick={() => handleCopy(order.deliveryAddress || '—')}
+                        onClick={(e) => handleCopy(e, order.deliveryAddress || '—', setIsCopied)}
                         title="Нажмите, чтобы скопировать"
                     >
                         {order.deliveryAddress || '—'}
@@ -61,7 +58,7 @@ export const OrderDetails = ({ order }: { order: Order }) => {
                     <div className={styles["info-label"]}>Имя заказчика:</div>
                     <div
                         className={`${styles["info-value"]} ${styles["copyable"]}`}
-                        onClick={() => handleCopy(order.fullName)}
+                        onClick={(e) => handleCopy(e, order.fullName, setIsCopied)}
                         title="Нажмите, чтобы скопировать"
                     >
                         {order.fullName}
@@ -70,7 +67,9 @@ export const OrderDetails = ({ order }: { order: Order }) => {
 
                 <div className={styles["info-row"]}>
                     <div className={styles["info-label"]}>Номер телефона:</div>
-                    <div className={styles["info-value"]}>{order.phone}</div>
+                    <div className={`${styles["info-value"]} ${styles["copyable"]}`}
+                        onClick={(e) => handleCopy(e, order.phone, setIsCopied)}
+                        title="Нажмите, чтобы скопировать">{order.phone}</div>
                 </div>
             </div>
             <table className={styles.table}>
@@ -86,12 +85,12 @@ export const OrderDetails = ({ order }: { order: Order }) => {
                         return (
                             <tr key={item.id}>
                                 <td className={styles["copyable"]}
-                                    onClick={() => handleCopy(item.price.toString())}
+                                    onClick={(e) => handleCopy(e, item.price.toString(), setIsCopied)}
                                     title="Нажмите, чтобы скопировать название товара">{item.product.title}</td>
                                 <td>{item.quantity}</td>
                                 <td
                                     className={styles["copyable"]}
-                                    onClick={() => handleCopy(item.price.toString())}
+                                    onClick={(e) => handleCopy(e, item.price.toString(), setIsCopied)}
                                     title="Нажмите, чтобы скопировать цену"
                                 >
                                     {item.price} ₽
@@ -102,17 +101,19 @@ export const OrderDetails = ({ order }: { order: Order }) => {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td className={styles["summer"]} colSpan={2}>Итого:</td>
+                        <td className={styles["summer"]}>Итого:</td>
+                        <td className={`${styles["summer-number"]}`}>{totalQuantity}</td>
                         <td
                             className={`${styles["summer-number"]} ${styles["copyable"]}`}
-                            onClick={() => handleCopy(total.toString())}
+                            onClick={(e) => handleCopy(e, totalSum.toString(), setIsCopied)}
                             title="Нажмите, чтобы скопировать итоговую сумму"
                         >
-                            {total} ₽
+                            {totalSum} ₽
                         </td>
                     </tr>
                 </tfoot>
             </table>
+            <span className={`${styles["copy-message"]} ${isCopied ? styles["visible"] : ""}`}>Текст скопирован</span>
         </div>
     );
 };
