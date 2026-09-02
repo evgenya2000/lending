@@ -38,17 +38,17 @@ export const Lending = ({ cards }: { cards: Card[] }) => {
                 <p className={styles["card-wrapper-text-price"]}>{card.price} ₽</p>
                 {!!quantity && (
                   <div className={styles["card-wrapper-text-quantity"]}>
-                    <Button variant="quantity" onClick={() => decrement(card.id)}>
+                    <Button variant="quantity" fontWeight={'regular'} onClick={() => decrement(card.id)}>
                       -
                     </Button>
                     <p>{quantity}</p>
-                    <Button variant="quantity" onClick={() => increment(card.id)}>
+                    <Button variant="quantity" fontWeight={'regular'} onClick={() => increment(card.id)}>
                       +
                     </Button>
                   </div>
                 )}
                 {!quantity && (
-                  <Button fullWidth onClick={() => addItem(card)}>
+                  <Button fullWidth fontWeight={'regular'} onClick={() => addItem(card)}>
                     Добавить в корзину
                   </Button>
                 )}

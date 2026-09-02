@@ -89,6 +89,6 @@ export interface Order {
     product: Card
   }[];
   createdAt: string;
-  status: 'PENDING' | 'ASSEMBLED';
+  status: 'PENDING' | 'ASSEMBLED' | 'COMPLETED' | 'CANSELED';
   issuedAt?: string;
 }

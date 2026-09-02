@@ -7,7 +7,7 @@ import { useState } from "react";
 import { handleCopy } from "@/shared/lib/helps/handleCopy";
 
 export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
-  const orderDetailsModal = useModal('order-details');
+  const              orderDetailsModal = useModal('order-details');
   const [isCopied, setIsCopied] = useState(false);
 
   if (!orders || orders.length === 0) {

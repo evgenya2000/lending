@@ -3,9 +3,11 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 import styles from "./button.module.css";
 
 type ButtonVariant = "primary" | "secondary" | "quantity" | "delete";
+type ButtonFontWeight= "regular" | "bold";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
+  fontWeight?: ButtonFontWeight;
   fullWidth?: boolean;
   children: ReactNode;
 }
@@ -13,6 +15,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = ({
   variant = "primary",
   fullWidth = false,
+  fontWeight = "bold",
   className,
   children,
   ...props
@@ -20,6 +23,7 @@ export const Button = ({
   const classes = [
     styles.button,
     styles[variant],
+    styles[fontWeight],
     fullWidth ? styles.fullWidth : "",
     className,
   ]

@@ -1,6 +1,5 @@
 .button {
   font-size: 14px;
-  font-weight: 500;
   color: #fff;
   background-color: #96669a;
   border-radius: 14px;
@@ -68,4 +67,12 @@
 
 .fullWidth {
   width: 100%;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.regular {
+  font-weight: 500;
 }
