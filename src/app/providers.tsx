@@ -9,10 +9,12 @@ import { useModal } from '@/features/modal/lib/use-modal';
 import { OrderForm } from '@/features/order-form/ui/order-form';
 import { OrderDetails } from '@/features/order-details/ui/order-details';
 import { useGLTF } from '@react-three/drei';
+import { Answer } from '@/features/answer/ui/answer';
 
 function ModalHost() {
   const orderModal = useModal('order');
   const orderDetailsModal = useModal('order-details');
+  const successModal = useModal('success');
 
   return (
     <>
@@ -22,7 +24,7 @@ function ModalHost() {
         showCloseButton
         ariaLabel="Оформление заказа"
       >
-        <OrderForm onCancel={orderModal.close} />
+        <OrderForm onSuccess={() => {orderModal.close(); successModal.open("Заказ отправлен");}} onCancel={orderModal.close} />
       </Modal>
 
       <Modal
@@ -32,6 +34,15 @@ function ModalHost() {
         ariaLabel="Детали заказа"
       >
         {orderDetailsModal.data && <OrderDetails order={orderDetailsModal.data} />}
+      </Modal>
+      
+      <Modal
+        isOpen={successModal.isOpen}
+        onClose={successModal.close}
+        showCloseButton
+        ariaLabel="Заказ отправлен"
+      >
+        {successModal.data && <Answer text={successModal.data} />}
       </Modal>
     </>
   );
