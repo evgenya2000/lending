@@ -6,14 +6,11 @@ import styles from './order-form.module.css';
 interface OrderFormProps {
   onSuccess?: () => void;
   onCancel?: () => void;
+  onError?: (text: string) => void;
 }
 
-export const OrderForm = ({ onSuccess, onCancel }: OrderFormProps) => {
-  const { register, handleSubmit, errors, isSubmitting, submitError, isPost, phoneFieldProps } = useOrderForm({ onSuccess });
-
-  const serverError = submitError ? 
-    (submitError as any)?.data?.message || 'Произошла ошибка при создании заказа' 
-    : null;
+export const OrderForm = ({ onSuccess, onCancel, onError }: OrderFormProps) => {
+  const { register, handleSubmit, errors, isSubmitting, isPost, phoneFieldProps } = useOrderForm({ onSuccess, onError });
 
   return (
     <div className={styles['wrapper-order-form']}>
@@ -151,13 +148,6 @@ export const OrderForm = ({ onSuccess, onCancel }: OrderFormProps) => {
             <span className={styles.error}>{errors.paymentMethod.message}</span>
           )}
         </div>
-
-        {/* Ошибка от сервера */}
-        {serverError && (
-          <div className={styles.error} role="alert">
-            {serverError}
-          </div>
-        )}
 
         {/* Кнопки */}
         <div className={styles.buttons}>

@@ -15,6 +15,7 @@ function ModalHost() {
   const orderModal = useModal('order');
   const orderDetailsModal = useModal('order-details');
   const successModal = useModal('success');
+  const errorModal = useModal('error');
 
   return (
     <>
@@ -22,16 +23,16 @@ function ModalHost() {
         isOpen={orderModal.isOpen}
         onClose={orderModal.close}
         showCloseButton
-        ariaLabel="Оформление заказа"
+        ariaLabel="orderModal"
       >
-        <OrderForm onSuccess={() => {orderModal.close(); successModal.open("Заказ отправлен");}} onCancel={orderModal.close} />
+        <OrderForm onSuccess={() => {orderModal.close(); successModal.open("Заказ отправлен");}} onCancel={orderModal.close} onError={errorModal.open}/>
       </Modal>
 
       <Modal
         isOpen={orderDetailsModal.isOpen}
         onClose={orderDetailsModal.close}
         showCloseButton
-        ariaLabel="Детали заказа"
+        ariaLabel={"orderDetailsModal"}
       >
         {orderDetailsModal.data && <OrderDetails order={orderDetailsModal.data} />}
       </Modal>
@@ -40,9 +41,18 @@ function ModalHost() {
         isOpen={successModal.isOpen}
         onClose={successModal.close}
         showCloseButton
-        ariaLabel="Заказ отправлен"
+        ariaLabel={"successModal"}
       >
         {successModal.data && <Answer text={successModal.data} />}
+      </Modal>
+      
+      <Modal
+        isOpen={errorModal.isOpen}
+        onClose={errorModal.close}
+        showCloseButton
+        ariaLabel={"errorModal"}
+      >
+        {errorModal.data && <Answer text={errorModal.data} />}
       </Modal>
     </>
   );

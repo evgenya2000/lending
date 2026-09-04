@@ -16,10 +16,11 @@ export interface OrderFormValues {
 
 interface UseOrderFormOptions {
   onSuccess?: () => void;
+  onError?: (text: string) => void;
 }
 
 
-export const useOrderForm = ({ onSuccess }: UseOrderFormOptions = {}) => {
+export const useOrderForm = ({ onSuccess, onError }: UseOrderFormOptions = {}) => {
   const {
     register,
     handleSubmit: originalHandleSubmit,
@@ -90,6 +91,7 @@ export const useOrderForm = ({ onSuccess }: UseOrderFormOptions = {}) => {
       reset();
       onSuccess?.();
     } catch (err) {
+      onError?.("Что-то пошло не так");
       console.error('Ошибка создания заказа:', err);
     }
   };
