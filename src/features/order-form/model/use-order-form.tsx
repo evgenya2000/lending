@@ -4,6 +4,7 @@ import { useCreateOrderMutation } from '@/shared/api/cards-api';
 import { selectCartItems } from '@/entities/cart/model/cart-slice';
 import { CreateOrderDto } from '@/shared/model/types';
 import { formatPhone } from '../helps/formatPhone';
+import { sanitizeInput, sanitizeFormData } from '@/shared/lib/helps/sanitize';
 
 export interface OrderFormValues {
   fullName: string;
@@ -76,12 +77,14 @@ export const useOrderForm = ({ onSuccess, onError }: UseOrderFormOptions = {}) =
       }));
 
       const cleanedPhone = data.phone.replace(/\D/g, '');
+      const sanitizedFullName = sanitizeInput(data.fullName);
+      const sanitizedAddress = sanitizeInput(data.deliveryAddress);
 
       const orderData: CreateOrderDto = {
-        fullName: data.fullName,
+        fullName: sanitizedFullName,
         phone: cleanedPhone,
         deliveryMethod: data.deliveryMethod,
-        deliveryAddress: data.deliveryAddress,
+        deliveryAddress: sanitizedAddress,
         ...(data.deliveryMethod === 'post' && { postalCode: data.postalCode }),
         paymentMethod: data.paymentMethod,
         items,
