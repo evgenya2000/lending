@@ -18,12 +18,12 @@ const cartSlice = createSlice({
             if (existing) {
                 existing.quantity += 1;
             } else {
-                const newItem = {
-                    ...structuredClone(action.payload),
-                    quantity: 1,
-                } as any;
-
-                state.items.push(newItem);
+                const cardData = JSON.parse(JSON.stringify(action.payload)) as CartItem;
+                                cardData.quantity = 1;
+                                // Проблема совместимости readonly-типов @react-three/drei с WritableDraft Redux Toolkit
+                                // JSON.parse/JSON.stringify создаёт глубокую копию без readonly, но типы сохраняются
+                                // @ts-expect-error - WritableDraft<CartItem> несовместим с CartItem из-за readonly в EnvironmentProps
+                                state.items.push(cardData);
             }
         },
         removeItem: (state, action: PayloadAction<number>) => {

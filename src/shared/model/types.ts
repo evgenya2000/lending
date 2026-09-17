@@ -56,7 +56,7 @@ export interface MacaronVisualConfig {
   speed: number;
 }
 
-export type PositionT = number | Vector3 | [x: number, y: number, z: number] | readonly [x: number, y: number, z: number] | Readonly<Vector3> | undefined;
+export type PositionT = number | Vector3 | [x: number, y: number, z: number] | undefined;
 
 export interface CartItem extends Card {
   quantity: number;
