@@ -1,8 +1,8 @@
 'use client';
 
+import { Suspense, useRef, useMemo, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useRef, useMemo, useEffect } from 'react';
 import * as THREE from 'three';
 
 const DEFAULT_COLORS = {
@@ -19,21 +19,23 @@ function isColorableMaterial(material: THREE.Material): material is (THREE.MeshS
   return 'color' in material && 'map' in material;
 }
 
-export function Macaron({
-  position,
-  speed = 0.5,
-  colors = DEFAULT_COLORS,
-}: {
+interface LoadedMacaronProps {
   position: [number, number, number];
-  speed?: number;
-  colors?: Partial<typeof DEFAULT_COLORS>;
-}) {
+  speed: number;
+  topColor: string;
+  bottomColor: string;
+  centerColor: string;
+}
+
+function LoadedMacaron({
+  position,
+  speed,
+  topColor,
+  bottomColor,
+  centerColor,
+}: LoadedMacaronProps) {
   const ref = useRef<THREE.Group>(null);
   const { scene } = useGLTF('./macaron_conf1.glb');
-
-  const topColor = colors?.Top ?? DEFAULT_COLORS.Top;
-  const bottomColor = colors?.Bottom ?? DEFAULT_COLORS.Bottom;
-  const centerColor = colors?.Center ?? DEFAULT_COLORS.Center;
 
   const coloredScene = useMemo(() => {
     const cloned = scene.clone();
@@ -71,7 +73,6 @@ export function Macaron({
     return cloned;
   }, [scene, topColor, bottomColor, centerColor]);
 
-  // Очистка материалов при размонтировании
   useEffect(() => {
     return () => {
       coloredScene.traverse((child) => {
@@ -94,4 +95,36 @@ export function Macaron({
   });
 
   return <primitive ref={ref} object={coloredScene} position={position} scale={1.8} />;
+}
+
+export function Macaron({
+  position,
+  speed = 0.5,
+  colors = DEFAULT_COLORS,
+  visible = false,
+}: {
+  position: [number, number, number];
+  speed?: number;
+  colors?: Partial<typeof DEFAULT_COLORS>;
+  visible?: boolean;
+}) {
+  const topColor = colors?.Top ?? DEFAULT_COLORS.Top;
+  const bottomColor = colors?.Bottom ?? DEFAULT_COLORS.Bottom;
+  const centerColor = colors?.Center ?? DEFAULT_COLORS.Center;
+
+  // useGLTF вызывается только внутри Suspense-компонента LoadedMacaron,
+  // чтобы не пытаться загружать файл, когда карточка не видна
+  if (!visible) return null;
+
+  return (
+    <Suspense fallback={null}>
+      <LoadedMacaron
+        position={position}
+        speed={speed}
+        topColor={topColor}
+        bottomColor={bottomColor}
+        centerColor={centerColor}
+      />
+    </Suspense>
+  );
 }

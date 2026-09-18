@@ -9,10 +9,12 @@ export const MacaronScene = ({
   config,
   id,
   track,
+  visible = false,
 }: {
   config: MacaronSceneConfig;
   id: string;
   track: RefObject<HTMLElement>;
+  visible?: boolean;
 }) => {
   const { camera: cameraConfig, environment, light, macaronConfig } = config;
   const controlsRef = useRef<any>(null);
@@ -56,6 +58,7 @@ export const MacaronScene = ({
         colors={macaronConfig.colors}
         position={macaronConfig.position}
         speed={macaronConfig.speed}
+        visible={visible}
       />
       <Environment preset="studio" /> {/* down, lobby, park */}
 

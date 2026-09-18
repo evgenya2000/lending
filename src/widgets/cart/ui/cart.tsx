@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from 'react';
 import { useRefsMap } from '@/shared/lib/hooks/use-refs-map';
+import { useVisibilityTracker } from '@/shared/lib/hooks/use-visibility-tracker';
 import { Card, CartItem } from '@/shared/model/types';
 import styles from "./cart.module.css";
 import { ContainerCanvas } from '@/shared/ui/container-canvas/container-canvas';
@@ -10,12 +12,23 @@ import { Delete } from '@/shared/icons/delete';
 import { useModal } from '@/features/modal/lib/use-modal';
 import { Button } from '@/shared/ui/button/button';
 
+
 export const Cart = () => {
     const { items, totalPrice, increment, decrement, removeItem, clearCart, totalQuantity } = useCart();
     const orderModal = useModal('order');
 
     const keys = items.map(c => String(c.id));
     const refsMap = useRefsMap<HTMLDivElement>(keys);
+    const { observe, isVisible } = useVisibilityTracker();
+
+    useEffect(() => {
+        keys.forEach((key) => {
+            const el = refsMap.get(key)?.current;
+            if (el) {
+                observe(el, key);
+            }
+        });
+    }, [keys, refsMap, observe]);
 
     const handleCheckout = () => {
         orderModal.open();
@@ -33,9 +46,18 @@ export const Cart = () => {
     return (
         <div className={styles["container"]}>
             <ContainerCanvas>
-                {items.map((item: Card) => (
-                    <MacaronScene key={item.id} config={item.macaronConfig} id={String(item.id)} track={refsMap.get(String(item.id))!} />
-                ))}
+                {items.map((item: Card) => {
+                    const key = String(item.id);
+                    return (
+                        <MacaronScene
+                            key={key}
+                            config={item.macaronConfig}
+                            id={key}
+                            track={refsMap.get(key)!}
+                            visible={isVisible(key)}
+                        />
+                    );
+                })}
             </ContainerCanvas>
             <h3>Ваша корзина</h3>
             <ul >

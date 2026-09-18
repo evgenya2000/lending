@@ -8,7 +8,6 @@ import { Modal } from '@/shared/ui/modal/modal';
 import { useModal } from '@/features/modal/lib/use-modal';
 import { OrderForm } from '@/features/order-form/ui/order-form';
 import { OrderDetails } from '@/features/order-details/ui/order-details';
-import { useGLTF } from '@react-three/drei';
 import { Answer } from '@/features/answer/ui/answer';
 
 function ModalHost() {
@@ -56,10 +55,6 @@ function ModalHost() {
       </Modal>
     </>
   );
-}
-
-if (typeof window !== 'undefined') {
-  useGLTF.preload('./macaron_conf1.glb');
 }
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
