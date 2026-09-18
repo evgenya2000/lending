@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Macaron Store
 
-## Getting Started
+Современный интернет-магазин макаронс с интерактивной 3D-визуализацией товаров. Проект демонстрирует возможности объединения высокопроизводительной 3D-графики с современным веб-интерфейсом.
 
-First, run the development server:
+## 🚀 Основные возможности
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Интерактивный 3D-каталог**: Динамическая визуализация товаров с помощью Three.js.
+- **Кастомизация в реальном времени**: Цвета 3D-моделей меняются динамически в зависимости от выбранного вкуса товара.
+- **Умная корзина**: Управление заказами с использованием Redux Toolkit.
+- **Система фильтрации**: Гибкий поиск товаров по цене и вкусам.
+- **Оформление заказа**: Полноценная форма заказа с валидацией данных.
+- **Адаптивный дизайн**: Оптимизированный UX для мобильных и десктопных устройств.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 Технологический стек
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Frontend
+- **Framework**: [Next.js 14+](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/) & [RTK Query](https://redux-toolkit.js.org/rtk-query/overview)
+- **Styling**: CSS Modules
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3D Graphics
+- **Engine**: [Three.js](https://threejs.org/)
+- **React Bridge**: [@react-three/fiber](https://github.com/pmndrs/react-three-fiber)
+- **Helpers**: [@react-three/drei](https://github.com/pmndrs/drei)
 
-## Learn More
+## 🏗 Архитектура
 
-To learn more about Next.js, take a look at the following resources:
+Проект построен с использованием методологии **Feature-Sliced Design (FSD)**, что обеспечивает высокую модульность и масштабируемость:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `app/` — инициализация приложения, провайдеры, глобальные стили и маршрутизация.
+- `pages-slice/` — композиционные слои страниц (Home, Cart, Orders).
+- `widgets/` — сложные самостоятельные блоки (Header, Footer, MacaronScene).
+- `features/` — бизнес-логика и взаимодействия (OrderForm, CatalogFilter, CartLogic).
+- `entities/` — бизнес-сущности и их модели (Macaron, CartState).
+- `shared/` — переиспользуемые UI-компоненты, API-клиенты, хуки и утилиты.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 💎 Технические особенности реализации
 
-## Deploy on Vercel
+### 3D Оптимизация
+- **View-based Rendering**: Вместо создания множества тяжелых `Canvas`, используется один общий рендерер с отдельными `View` для каждой карточки товара.
+- **Dynamic Painting**: Реализована система динамической перекраски одной базовой `.glb` модели через обход дерева объектов (`traverse`) и клонирование материалов.
+- **Memory Management**: Строгий контроль за очисткой памяти GPU через `dispose()` материалов при размонтировании компонентов.
+- **Lazy Loading**: 3D-модели загружаются только при попадании компонента в область видимости пользователя (`visibility tracker`).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📦 Запуск проекта
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Установка зависимостей**:
+   ```bash
+   npm install
+   ```
+
+2. **Запуск сервера разработки**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Открытие приложения**:
+    Перейдите по адресу http://localhost:3000
