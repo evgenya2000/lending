@@ -5,6 +5,11 @@ import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
+const MODEL_PATH = '/macaron_conf1_draco.glb';
+
+useGLTF.setDecoderPath('/draco/');
+useGLTF.preload(MODEL_PATH);
+
 const DEFAULT_COLORS = {
   Top: '#ff6b6b',
   Bottom: '#fbc490',
@@ -35,7 +40,7 @@ function LoadedMacaron({
   centerColor,
 }: LoadedMacaronProps) {
   const ref = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('./macaron_conf1.glb');
+  const { scene } = useGLTF(MODEL_PATH);
 
   const coloredScene = useMemo(() => {
     const cloned = scene.clone();
