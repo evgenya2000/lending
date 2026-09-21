@@ -1,54 +1,47 @@
 /*
- * Утилита для санитизации пользовательского ввода от XSS-атак
+ * Утилиты нормализации пользовательского ввода.
+ *
+ * ВАЖНО: здесь НЕ выполняется HTML-экранирование.
+ * React автоматически экранирует значения при рендере, а экранирование на входе
+ * портит данные (например, `ООО "Ромашка"` превращалось в `ООО &quot;Ромашка&quot;`)
+ * и приводит к двойному экранированию при выводе.
+ *
+ * Задача этих функций — убрать управляющие символы и нормализовать пробелы,
+ * чтобы на сервер уходил предсказуемый текст.
  */
 
+// Управляющие символы C0/C1, которые не должны попадать в текстовые поля
+const CONTROL_CHARS = /[\u0000-\u001F\u007F-\u009F]/g;
+
 /**
- * Удаляет HTML-теги и опасные символы из строки
- * Используется для очистки пользовательского ввода перед отправкой на сервер
+ * Нормализует строку: удаляет управляющие символы, схлопывает пробелы, обрезает края.
+ * Не экранирует HTML — это ответственность слоя рендера.
  */
 export function sanitizeInput(value: string): string {
-  // Замена HTML-сущностей на безопасные эквиваленты
+  if (typeof value !== 'string') return '';
   return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;')
-    .replace(/\//g, '&#x2F;')
+    .replace(CONTROL_CHARS, ' ')
+    .replace(/\s+/g, ' ')
     .trim();
 }
 
 /**
- * Очищает объект формы от XSS-атак
- * Рекурсивно обрабатывает все строковые поля
+ * Рекурсивно нормализует строковые поля объекта (включая строки внутри массивов).
  */
 export function sanitizeFormData<T extends Record<string, unknown>>(data: T): T {
   const sanitized: Record<string, unknown> = {};
-  
+
   for (const [key, value] of Object.entries(data)) {
     if (typeof value === 'string') {
       sanitized[key] = sanitizeInput(value);
     } else if (Array.isArray(value)) {
-      sanitized[key] = value.map(item => 
+      sanitized[key] = value.map((item) =>
         typeof item === 'string' ? sanitizeInput(item) : item
       );
     } else {
       sanitized[key] = value;
     }
   }
-  
-  return sanitized as T;
-}
 
-/**
- * Безопасное декодирование строки для отображения (если нужно показать оригинал)
- */
-export function decodeSafeInput(value: string): string {
-  return value
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#x27;/g, "'")
-    .replace(/&#x2F;/g, '/')
-    .replace(/&amp;/g, '&');
+  return sanitized as T;
 }
