@@ -7,6 +7,7 @@ import {
   StyledEmpty,
   StyledCopyableTd,
   StyledCopyMessage,
+  StyledWrapperButton,
 } from "./orders.styles";
 import { Button } from "@/shared/ui/button/button";
 import { useModal } from "@/features/modal/lib/use-modal";
@@ -14,7 +15,9 @@ import { useState } from "react";
 import { handleCopy } from "@/shared/lib/helps/handleCopy";
 
 export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
-  const              orderDetailsModal = useModal('order-details');
+  const orderDetailsModal = useModal('order-details');
+  const assembleOrderModal = useModal('assemble-order');
+
   const [isCopied, setIsCopied] = useState(false);
 
   if (!orders || orders.length === 0) {
@@ -61,12 +64,22 @@ export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
                 onClick={(e) => handleCopy(e, order.phone, setIsCopied)}
                 title="Нажмите, чтобы скопировать">{order.phone}</StyledCopyableTd>
               <td>
-                <Button
-                  type="button"
-                  onClick={() => orderDetailsModal.open(order)}
-                >
-                  Просмотр деталей заказа
-                </Button>
+                <StyledWrapperButton>
+                  <Button
+                    type="button"
+                    onClick={() => orderDetailsModal.open(order)}
+                  >
+                    Просмотр деталей заказа
+                  </Button>
+                  {order.status === "PENDING" && (
+                    <Button
+                      type="button"
+                      onClick={() => assembleOrderModal.open(order)}
+                    >
+                      Собрать заказ
+                    </Button>
+                  )}
+                </StyledWrapperButton>
               </td>
             </tr>
           ))}

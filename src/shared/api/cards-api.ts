@@ -6,6 +6,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const cardsApi = createApi({
   reducerPath: 'cardsApi',
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  tagTypes: ['Orders'],
   endpoints: (builder) => ({
     getCards: builder.query<Card[], void>({
       query: () => '/cards',
@@ -15,6 +16,7 @@ export const cardsApi = createApi({
     }),
     getOrders: builder.query<Order[], void>({
       query: () => '/orders',
+      providesTags: ['Orders'],
     }),
     createOrder: builder.mutation<Order, CreateOrderDto>({
       query: (data) => ({
@@ -23,7 +25,20 @@ export const cardsApi = createApi({
         body: data,
       }),
     }),
+    assembleOrder: builder.mutation<Order, number>({
+      query: (id) => ({
+        url: `/orders/${id}/assemble`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: ['Orders'],
+    }),
   }),
 });
 
-export const { useGetCardsQuery, useGetTastesQuery, useGetOrdersQuery, useCreateOrderMutation } = cardsApi;
+export const {
+  useGetCardsQuery,
+  useGetTastesQuery,
+  useGetOrdersQuery,
+  useCreateOrderMutation,
+  useAssembleOrderMutation,
+} = cardsApi;

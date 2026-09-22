@@ -50,7 +50,7 @@ export const StyledTable = styled.table`
   th:last-child,
   td:last-child {
     border-right: none;
-    width: 216px;
+    width: 352px;
   }
 `;
 
@@ -77,3 +77,8 @@ export const StyledCopyMessage = styled.span<{ $visible: boolean }>`
   transition: opacity 0.3s ease;
   font-size: 18px;
 `;
+
+export const StyledWrapperButton = styled.div `
+  display: flex;
+  gap: 10px;
+`
