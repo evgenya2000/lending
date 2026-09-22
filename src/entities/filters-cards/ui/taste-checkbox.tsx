@@ -1,5 +1,9 @@
 import { memo } from 'react';
-import styles from "./taste-checkbox.module.css"
+import {
+  StyledCheckbox,
+  StyledOptionLabel,
+  StyledOptionsContainer,
+} from './taste-checkbox.styles';
 
 export const TasteCheckboxes = memo(({ 
   tastes, 
@@ -19,26 +23,22 @@ export const TasteCheckboxes = memo(({
   };
 
   return (
-    <div className={styles.optionsContainer}>
+    <StyledOptionsContainer>
       {tastes.map((taste) => {
         const isActive = selected.includes(taste);
         return (
-          <label
-            key={taste}
-            className={`${styles.optionLabel} ${isActive ? styles.optionLabelActive : ''}`}
-          >
-            <input
+          <StyledOptionLabel key={taste} $active={isActive}>
+            <StyledCheckbox
               type="checkbox"
-              className={styles.checkbox}
               value={taste}
               checked={isActive}
               onChange={handleToggle(taste)}
             />
             {taste}
-          </label>
+          </StyledOptionLabel>
         );
       })}
-    </div>
+    </StyledOptionsContainer>
   );
 });
 

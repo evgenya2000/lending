@@ -4,13 +4,13 @@ import { useEffect } from 'react';
 import { useRefsMap } from '@/shared/lib/hooks/use-refs-map';
 import { useVisibilityTracker } from '@/shared/lib/hooks/use-visibility-tracker';
 import { Card, CartItem } from '@/shared/model/types';
-import styles from "./cart.module.css";
 import { ContainerCanvas } from '@/shared/ui/container-canvas/container-canvas';
 import { MacaronScene } from '@/widgets/macaron-scene/ui/macaron-scene';
 import { useCart } from '@/features/cart/useCart';
 import { Delete } from '@/shared/icons/delete';
 import { useModal } from '@/features/modal/lib/use-modal';
 import { Button } from '@/shared/ui/button/button';
+import { StyledContainer, StyledPrice, StyledWrapper3d, StyledWrapperButton, StyledWrapperText, StyledWrapperTotal, StyledWrapperTotalButton } from './cart.styles';
 
 
 export const Cart = () => {
@@ -36,15 +36,15 @@ export const Cart = () => {
 
     if (items.length === 0) {
         return (
-            <div className={styles["container"]}>
+            <StyledContainer>
                 <h3>Корзина пуста</h3>
                 <p>Добавьте товары из каталога</p>
-            </div>
+            </StyledContainer>
         );
     }
 
     return (
-        <div className={styles["container"]}>
+        <StyledContainer>
             <ContainerCanvas>
                 {items.map((item: Card) => {
                     const key = String(item.id);
@@ -63,17 +63,16 @@ export const Cart = () => {
             <ul >
                 {items.map((item: CartItem) => (
                     <li key={item.id} >
-                        <div
-                            className={styles["wrapper-3d"]}
+                        <StyledWrapper3d
                             ref={refsMap.get(String(item.id))!}
                             style={{ position: "relative" }}
                         />
-                        <div className={styles["wrapper-text"]}>
+                        <StyledWrapperText>
                             <h3>{item.title}</h3>
                             <p>{item.description}</p>
                             <p>Цена: {item.price} ₽</p>
-                        </div>
-                        <div className={styles["wrapper-button"]}>
+                        </StyledWrapperText>
+                        <StyledWrapperButton>
                             <Button variant="quantity" onClick={() => decrement(item.id)}>
                                 -
                             </Button>
@@ -84,23 +83,23 @@ export const Cart = () => {
                             <Button variant="delete" onClick={() => removeItem(item.id)}>
                                 <Delete />
                             </Button>
-                        </div>
-                        <div className={styles["price"]}>{item.price * item.quantity} руб.</div>
+                        </StyledWrapperButton>
+                        <StyledPrice>{item.price * item.quantity} руб.</StyledPrice>
                     </li>
                 ))}
             </ul>
-            <div className={styles["wrapper-total"]}>
+            <StyledWrapperTotal>
                 <h3>Итого: {totalPrice} руб.</h3>
                 <p>Внимание: заказы принимаются от 6 единиц товара!</p>
-                <div className={styles["wrapper-total-button"]}>
+                <StyledWrapperTotalButton>
                     <Button type="button" onClick={handleCheckout} disabled={totalQuantity < 6}>
                         Оформить заказ
                     </Button>
                     <Button type="button" onClick={clearCart} variant="secondary">
                         Очистить корзину
                     </Button>
-                </div>
-            </div>
-        </div>
+                </StyledWrapperTotalButton>
+            </StyledWrapperTotal>
+        </StyledContainer>
     );
 };

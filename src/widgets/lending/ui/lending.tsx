@@ -1,6 +1,5 @@
 "use client";
 import { useEffect } from "react";
-import styles from "./lending.module.css";
 import { MacaronScene } from "@/widgets/macaron-scene/ui/macaron-scene";
 import { Card } from "@/shared/model/types";
 import { ContainerCanvas } from '@/shared/ui/container-canvas/container-canvas';
@@ -8,6 +7,16 @@ import { useRefsMap } from "@/shared/lib/hooks/use-refs-map";
 import { useVisibilityTracker } from "@/shared/lib/hooks/use-visibility-tracker";
 import { useCart } from "@/features/cart/useCart";
 import { Button } from "@/shared/ui/button/button";
+import {
+  StyledGrid,
+  StyledCardWrapper,
+  StyledCardWrapperText,
+  StyledCardDescription,
+  StyledCardPrice,
+  StyledCardQuantity,
+  StyledWrapper3d,
+  StyledText,
+} from "./lending.styles";
 
 
 export const Lending = ({ cards }: { cards: Card[] }) => {
@@ -25,7 +34,7 @@ export const Lending = ({ cards }: { cards: Card[] }) => {
     });
   }, [keys, refsMap, observe]);
 
-  if (!cards?.length) return <h3 className={styles["text"]}>Ничего не найдено</h3>;
+  if (!cards?.length) return <StyledText>Ничего не найдено</StyledText>;
 
   return (
     <>
@@ -44,23 +53,19 @@ export const Lending = ({ cards }: { cards: Card[] }) => {
         })}
       </ContainerCanvas>
 
-      <div className={styles.grid}>
+      <StyledGrid>
         {cards.map((card: Card) => {
           const key = String(card.id);
           const quantity = getQuantityInCart(card.id);
           return (
-            <div key={key} className={styles["card-wrapper"]}>
-              <div
-                className={styles["wrapper-3d"]}
-                ref={refsMap.get(key)!}
-                style={{ position: "relative" }}
-              />
-              <div className={styles["card-wrapper-text"]}>
+            <StyledCardWrapper key={key}>
+              <StyledWrapper3d ref={refsMap.get(key)!} />
+              <StyledCardWrapperText>
                 <h3>{card.title}</h3>
-                <p className={styles["card-wrapper-text-description"]}>{card.description}</p>
-                <p className={styles["card-wrapper-text-price"]}>{card.price} ₽</p>
+                <StyledCardDescription>{card.description}</StyledCardDescription>
+                <StyledCardPrice>{card.price} ₽</StyledCardPrice>
                 {!!quantity && (
-                  <div className={styles["card-wrapper-text-quantity"]}>
+                  <StyledCardQuantity>
                     <Button variant="quantity" fontWeight={'regular'} onClick={() => decrement(card.id)}>
                       -
                     </Button>
@@ -68,18 +73,18 @@ export const Lending = ({ cards }: { cards: Card[] }) => {
                     <Button variant="quantity" fontWeight={'regular'} onClick={() => increment(card.id)}>
                       +
                     </Button>
-                  </div>
+                  </StyledCardQuantity>
                 )}
                 {!quantity && (
                   <Button fullWidth fontWeight={'regular'} onClick={() => addItem(card)}>
                     Добавить в корзину
                   </Button>
                 )}
-              </div>
-            </div>
+              </StyledCardWrapperText>
+            </StyledCardWrapper>
           );
         })}
-      </div>
+      </StyledGrid>
     </>
   );
 };

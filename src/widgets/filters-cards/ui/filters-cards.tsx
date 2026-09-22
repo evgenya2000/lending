@@ -1,13 +1,13 @@
 "use client";
 
 import { AppliedFilters } from "@/shared/model/types";
-import styles from "./filters-cards.module.css"
 import { useGetTastesQuery } from "@/shared/api/cards-api";
 import { Controller } from "react-hook-form";
 import { Input } from "@/shared/ui/input/input";
 import { Button } from "@/shared/ui/button/button";
 import { TasteCheckboxes } from "@/entities/filters-cards/ui/taste-checkbox";
 import { useFiltersForm } from "@/entities/filters-cards/hooks/useFiltersForm";
+import { StyledButtons, StyledFields, StyledFieldset, StyledFiltersForm, StyledPrice, StyledWrapperLoader } from "./filters-cards.styles";
 
 
 export const FiltersCards = (
@@ -18,18 +18,18 @@ export const FiltersCards = (
   const { data: tastes = [], isLoading, isError } = useGetTastesQuery();
 
   if (isLoading) {
-    return <h3 className={styles.filtersForm}>Загрузка вкусов...</h3>;
+    return <StyledWrapperLoader>Загрузка вкусов...</StyledWrapperLoader>;
   }
 
   if (isError) {
-    return <h3 className={styles.filtersForm}>Ошибка загрузки вкусов</h3>;
+    return <StyledWrapperLoader>Ошибка загрузки вкусов</StyledWrapperLoader>;
   }
 
   return (
-    <form className={styles.filtersForm}>
-      <div className={styles.price}>
+    <StyledFiltersForm>
+      <StyledPrice>
         <h3>Цена ₽</h3>
-        <div className={styles.fields}>
+        <StyledFields>
           <Controller
             name="priceFrom"
             control={control}
@@ -60,9 +60,9 @@ export const FiltersCards = (
               />
             )}
           />
-        </div>
-      </div>
-      <fieldset className={styles.fieldset}>
+        </StyledFields>
+      </StyledPrice>
+      <StyledFieldset>
         <h3>Вкусы</h3>
         <Controller
           name="tastes"
@@ -75,12 +75,12 @@ export const FiltersCards = (
             />
           )}
         />
-      </fieldset>
-      <div className={styles["buttons"]}>
+      </StyledFieldset>
+      <StyledButtons>
         <Button type="button" onClick={handleReset} variant="secondary">
           Сбросить
         </Button>
-      </div>
-    </form>
+      </StyledButtons>
+    </StyledFiltersForm>
   );
 };

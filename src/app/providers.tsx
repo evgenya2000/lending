@@ -9,6 +9,8 @@ import { useModal } from '@/features/modal/lib/use-modal';
 import { OrderForm } from '@/features/order-form/ui/order-form';
 import { OrderDetails } from '@/features/order-details/ui/order-details';
 import { Answer } from '@/features/answer/ui/answer';
+import { StyledComponentsRegistry } from './styled-registry';
+import { GlobalStyle } from './global-styles';
 
 function ModalHost() {
   const orderModal = useModal('order');
@@ -59,13 +61,16 @@ function ModalHost() {
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
-    <ModalProvider>
-      <StoreProvider>
-        <Header />
-        {children}
-        <Footer />
-        <ModalHost />
-      </StoreProvider>
-    </ModalProvider>
+    <StyledComponentsRegistry>
+      <GlobalStyle />
+      <ModalProvider>
+        <StoreProvider>
+          <Header />
+          {children}
+          <Footer />
+          <ModalHost />
+        </StoreProvider>
+      </ModalProvider>
+    </StyledComponentsRegistry>
   );
 }

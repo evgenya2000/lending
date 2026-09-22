@@ -1,14 +1,11 @@
 "use client";
 import { forwardRef, InputHTMLAttributes } from "react";
-import styles from "./input.module.css";
+import { StyledInput } from "./input.styles";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }, ref) => {
-    const classes = [styles.input, className].filter(Boolean).join(" ");
-    return <input ref={ref} className={classes} {...props} />;
-  }
-);
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => (
+  <StyledInput ref={ref} {...props} />
+));
 
 Input.displayName = "Input";

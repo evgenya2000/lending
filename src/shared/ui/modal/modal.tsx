@@ -1,7 +1,12 @@
 'use client';
 
 import { createPortal } from 'react-dom';
-import styles from './modal.module.css';
+import {
+  StyledCloseButton,
+  StyledModal,
+  StyledModalContent,
+  StyledOverlay,
+} from './modal.styles';
 import { useModal } from './use-modal-state';
 
 interface ModalProps {
@@ -43,14 +48,14 @@ export const Modal = ({
   if (!isOpen) return null;
 
   return createPortal(
-    <div
-      className={`${styles.overlay} ${overlayClassName}`}
+    <StyledOverlay
+      className={overlayClassName}
       onClick={handleOverlayClick}
       data-testid="modal-overlay"
     >
-      <div
+      <StyledModal
         ref={modalRef}
-        className={`${styles.modal} ${className}`}
+        className={className}
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel}
@@ -59,8 +64,8 @@ export const Modal = ({
         data-testid="modal"
       >
         {showCloseButton && (
-          <button
-            className={`${styles.closeButton} ${closeButtonClassName}`}
+          <StyledCloseButton
+            className={closeButtonClassName}
             onClick={onClose}
             aria-label="Close modal"
             data-testid="modal-close-button"
@@ -80,13 +85,13 @@ export const Modal = ({
                 strokeLinejoin="round"
               />
             </svg>
-          </button>
+          </StyledCloseButton>
         )}
-        <div className={`${styles.content} ${contentClassName}`}>
+        <StyledModalContent className={contentClassName}>
           {children}
-        </div>
-      </div>
-    </div>,
+        </StyledModalContent>
+      </StyledModal>
+    </StyledOverlay>,
     document.body
   );
 };

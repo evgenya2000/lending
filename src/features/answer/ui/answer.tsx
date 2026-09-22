@@ -1,11 +1,11 @@
 'use client';
-import styles from './answer.module.css';
+import { StyledAnswerContainer } from './answer.styles';
 
 export const Answer = ({ text }: { text: string }) => {
     console.log(text);
     return (
-        <div className={styles["container"]}>
+        <StyledAnswerContainer>
             <h3>{text}</h3>
-        </div>
+        </StyledAnswerContainer>
     );
 };

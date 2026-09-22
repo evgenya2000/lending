@@ -1,7 +1,17 @@
 'use client';
 
 import { Order } from '@/shared/model/types';
-import styles from './order-details.module.css';
+import {
+    StyledContainer,
+    StyledCopyable,
+    StyledCopyableCell,
+    StyledCopyMessage,
+    StyledInfo,
+    StyledInfoLabel,
+    StyledInfoRow,
+    StyledInfoValue,
+    StyledTable,
+} from './order-details.styles';
 import { handleCopy } from '@/shared/lib/helps/handleCopy';
 import { useState } from 'react';
 
@@ -20,59 +30,60 @@ export const OrderDetails = ({ order }: { order: Order }) => {
     );
 
     return (
-        <div className={styles["container"]}>
+        <StyledContainer>
             <h3>Детали заказа №{order.id}</h3>
-            <div className={styles["info"]}>
-                <div className={styles["info-row"]}>
-                    <div className={styles["info-label"]}>Статус:</div>
-                    <div className={styles["info-value"]}>{order.status === "PENDING" ? "Ожидает" : order.status === "ASSEMBLED" ? "Собран" : "-"}</div>
-                </div>
+            <StyledInfo>
+                <StyledInfoRow>
+                    <StyledInfoLabel>Статус:</StyledInfoLabel>
+                    <StyledInfoValue>{order.status === "PENDING" ? "Ожидает" : order.status === "ASSEMBLED" ? "Собран" : "-"}</StyledInfoValue>
+                </StyledInfoRow>
 
-                <div className={styles["info-row"]}>
-                    <div className={styles["info-label"]}>Дата создания:</div>
-                    <div className={styles["info-value"]}>{new Date(order.createdAt).toLocaleString('ru-RU')}</div>
-                </div>
+                <StyledInfoRow>
+                    <StyledInfoLabel>Дата создания:</StyledInfoLabel>
+                    <StyledInfoValue>{new Date(order.createdAt).toLocaleString('ru-RU')}</StyledInfoValue>
+                </StyledInfoRow>
 
-                <div className={styles["info-row"]}>
-                    <div className={styles["info-label"]}>Дата выдачи:</div>
-                    <div className={styles["info-value"]}>{order.issuedAt ? new Date(order.issuedAt).toLocaleString('ru-RU') : '—'}</div>
-                </div>
+                <StyledInfoRow>
+                    <StyledInfoLabel>Дата выдачи:</StyledInfoLabel>
+                    <StyledInfoValue>{order.issuedAt ? new Date(order.issuedAt).toLocaleString('ru-RU') : '—'}</StyledInfoValue>
+                </StyledInfoRow>
 
-                <div className={styles["info-row"]}>
-                    <div className={styles["info-label"]}>Адрес доставки:</div>
-                    <div
-                        className={`${styles["info-value"]} ${styles["copyable"]}`}
+                <StyledInfoRow>
+                    <StyledInfoLabel>Адрес доставки:</StyledInfoLabel>
+                    <StyledCopyable
                         onClick={(e) => handleCopy(e, order.deliveryAddress || '—', setIsCopied)}
                         title="Нажмите, чтобы скопировать"
                     >
                         {order.deliveryAddress || '—'}
-                    </div>
-                </div>
+                    </StyledCopyable>
+                </StyledInfoRow>
 
-                <div className={styles["info-row"]}>
-                    <div className={styles["info-label"]}>Способ доставки:</div>
-                    <div className={styles["info-value"]}>{order.deliveryMethod === 'courier' ? 'Курьер' : 'Почта'}</div>
-                </div>
+                <StyledInfoRow>
+                    <StyledInfoLabel>Способ доставки:</StyledInfoLabel>
+                    <StyledInfoValue>{order.deliveryMethod === 'courier' ? 'Курьер' : 'Почта'}</StyledInfoValue>
+                </StyledInfoRow>
 
-                <div className={styles["info-row"]}>
-                    <div className={styles["info-label"]}>Имя заказчика:</div>
-                    <div
-                        className={`${styles["info-value"]} ${styles["copyable"]}`}
+                <StyledInfoRow>
+                    <StyledInfoLabel>Имя заказчика:</StyledInfoLabel>
+                    <StyledCopyable
                         onClick={(e) => handleCopy(e, order.fullName, setIsCopied)}
                         title="Нажмите, чтобы скопировать"
                     >
                         {order.fullName}
-                    </div>
-                </div>
+                    </StyledCopyable>
+                </StyledInfoRow>
 
-                <div className={styles["info-row"]}>
-                    <div className={styles["info-label"]}>Номер телефона:</div>
-                    <div className={`${styles["info-value"]} ${styles["copyable"]}`}
+                <StyledInfoRow>
+                    <StyledInfoLabel>Номер телефона:</StyledInfoLabel>
+                    <StyledCopyable
                         onClick={(e) => handleCopy(e, order.phone, setIsCopied)}
-                        title="Нажмите, чтобы скопировать">{order.phone}</div>
-                </div>
-            </div>
-            <table className={styles.table}>
+                        title="Нажмите, чтобы скопировать"
+                    >
+                        {order.phone}
+                    </StyledCopyable>
+                </StyledInfoRow>
+            </StyledInfo>
+            <StyledTable>
                 <thead>
                     <tr>
                         <th>Название</th>
@@ -84,36 +95,34 @@ export const OrderDetails = ({ order }: { order: Order }) => {
                     {order.items.map((item) => {
                         return (
                             <tr key={item.id}>
-                                <td className={styles["copyable"]}
+                                <StyledCopyableCell
                                     onClick={(e) => handleCopy(e, item.price.toString(), setIsCopied)}
-                                    title="Нажмите, чтобы скопировать название товара">{item.product.title}</td>
+                                    title="Нажмите, чтобы скопировать название товара">{item.product.title}</StyledCopyableCell>
                                 <td>{item.quantity}</td>
-                                <td
-                                    className={styles["copyable"]}
+                                <StyledCopyableCell
                                     onClick={(e) => handleCopy(e, item.price.toString(), setIsCopied)}
                                     title="Нажмите, чтобы скопировать цену"
                                 >
                                     {item.price} ₽
-                                </td>
+                                </StyledCopyableCell>
                             </tr>
                         );
                     })}
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td className={styles["summer"]}>Итого:</td>
-                        <td className={`${styles["summer-number"]}`}>{totalQuantity}</td>
-                        <td
-                            className={`${styles["summer-number"]} ${styles["copyable"]}`}
+                        <td>Итого:</td>
+                        <td>{totalQuantity}</td>
+                        <StyledCopyableCell
                             onClick={(e) => handleCopy(e, totalSum.toString(), setIsCopied)}
                             title="Нажмите, чтобы скопировать итоговую сумму"
                         >
                             {totalSum} ₽
-                        </td>
+                        </StyledCopyableCell>
                     </tr>
                 </tfoot>
-            </table>
-            <span className={`${styles["copy-message"]} ${isCopied ? styles["visible"] : ""}`}>Текст скопирован</span>
-        </div>
+            </StyledTable>
+            <StyledCopyMessage $visible={isCopied}>Текст скопирован</StyledCopyMessage>
+        </StyledContainer>
     );
 };

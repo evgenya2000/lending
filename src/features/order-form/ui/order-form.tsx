@@ -1,7 +1,16 @@
-import { Input } from '@/shared/ui/input/input';
 import { useOrderForm } from '../model/use-order-form';
 import { Button } from '@/shared/ui/button/button';
-import styles from './order-form.module.css';
+import {
+  StyledButtons,
+  StyledError,
+  StyledField,
+  StyledForm,
+  StyledFormInput,
+  StyledLabel,
+  StyledRadioGroup,
+  StyledRadioLabel,
+  StyledWrapper,
+} from './order-form.styles';
 
 interface OrderFormProps {
   onSuccess?: () => void;
@@ -13,47 +22,45 @@ export const OrderForm = ({ onSuccess, onCancel, onError }: OrderFormProps) => {
   const { register, handleSubmit, errors, isSubmitting, isPost, phoneFieldProps } = useOrderForm({ onSuccess, onError });
 
   return (
-    <div className={styles['wrapper-order-form']}>
+    <StyledWrapper>
       <h3>Оформление заказа</h3>
       <p>Пожалуйста, заполните форму</p>
-      <form onSubmit={handleSubmit} noValidate className={styles.form}>
-        <div className={styles.field}>
-          <label htmlFor="fullName" className={styles.label}>Имя</label>
-          <Input
+      <StyledForm onSubmit={handleSubmit} noValidate>
+        <StyledField>
+          <StyledLabel htmlFor="fullName">Имя</StyledLabel>
+          <StyledFormInput
             id="fullName"
-            className={styles.input}
             {...register('fullName', {
               required: 'Поле обязательно для заполнения',
               minLength: {
                 value: 3,
                 message: 'Минимум 3 символа',
               },
-            })} 
+            })}
             aria-invalid={errors.fullName ? 'true' : 'false'}
           />
           {errors.fullName && (
-            <span className={styles.error}>{errors.fullName.message}</span>
+            <StyledError>{errors.fullName.message}</StyledError>
           )}
-        </div>
+        </StyledField>
 
-         {/* Телефон */}
-        <div className={styles.field}>
-          <label htmlFor="phone" className={styles.label}>Номер телефона</label>
-          <Input
+        {/* Телефон */}
+        <StyledField>
+          <StyledLabel htmlFor="phone">Номер телефона</StyledLabel>
+          <StyledFormInput
             id="phone"
-            className={styles.input}
             {...phoneFieldProps}
             placeholder="+7 900 123-45-67"
             aria-invalid={errors.phone ? 'true' : 'false'}
           />
-          {errors.phone && <span className={styles.error}>{errors.phone.message}</span>}
-        </div>
+          {errors.phone && <StyledError>{errors.phone.message}</StyledError>}
+        </StyledField>
 
         {/* Способ доставки */}
-        <div className={styles.field}>
-          <label className={styles.label}>Способ доставки</label>
-          <div className={styles.radioGroup}>
-            <label className={styles.radioLabel}>
+        <StyledField>
+          <StyledLabel>Способ доставки</StyledLabel>
+          <StyledRadioGroup>
+            <StyledRadioLabel>
               <input
                 type="radio"
                 value="courier"
@@ -62,27 +69,26 @@ export const OrderForm = ({ onSuccess, onCancel, onError }: OrderFormProps) => {
                 })}
               />
               Курьер
-            </label>
-            <label className={styles.radioLabel}>
+            </StyledRadioLabel>
+            <StyledRadioLabel>
               <input
                 type="radio"
                 value="post"
                 {...register('deliveryMethod')}
               />
               Почта
-            </label>
-          </div>
+            </StyledRadioLabel>
+          </StyledRadioGroup>
           {errors.deliveryMethod && (
-            <span className={styles.error}>{errors.deliveryMethod.message}</span>
+            <StyledError>{errors.deliveryMethod.message}</StyledError>
           )}
-        </div>
+        </StyledField>
 
         {/* Адрес доставки */}
-        <div className={styles.field}>
-          <label htmlFor="deliveryAddress" className={styles.label}>Адрес доставки</label>
-          <Input
+        <StyledField>
+          <StyledLabel htmlFor="deliveryAddress">Адрес доставки</StyledLabel>
+          <StyledFormInput
             id="deliveryAddress"
-            className={styles.input}
             {...register('deliveryAddress', {
               required: 'Укажите адрес доставки',
               minLength: {
@@ -94,17 +100,16 @@ export const OrderForm = ({ onSuccess, onCancel, onError }: OrderFormProps) => {
             aria-invalid={errors.deliveryAddress ? 'true' : 'false'}
           />
           {errors.deliveryAddress && (
-            <span className={styles.error}>{errors.deliveryAddress.message}</span>
+            <StyledError>{errors.deliveryAddress.message}</StyledError>
           )}
-        </div>
+        </StyledField>
 
         {/* Почтовый индекс (только при доставке почтой) */}
         {isPost && (
-          <div className={styles.field}>
-            <label htmlFor="postalCode" className={styles.label}>Почтовый индекс</label>
-            <Input
+          <StyledField>
+            <StyledLabel htmlFor="postalCode">Почтовый индекс</StyledLabel>
+            <StyledFormInput
               id="postalCode"
-              className={styles.input}
               {...register('postalCode', {
                 required: 'Укажите почтовый индекс',
                 pattern: {
@@ -116,16 +121,16 @@ export const OrderForm = ({ onSuccess, onCancel, onError }: OrderFormProps) => {
               aria-invalid={errors.postalCode ? 'true' : 'false'}
             />
             {errors.postalCode && (
-              <span className={styles.error}>{errors.postalCode.message}</span>
+              <StyledError>{errors.postalCode.message}</StyledError>
             )}
-          </div>
+          </StyledField>
         )}
 
         {/* Способ оплаты */}
-        <div className={styles.field}>
-          <label className={styles.label}>Способ оплаты</label>
-          <div className={styles.radioGroup}>
-            <label className={styles.radioLabel}>
+        <StyledField>
+          <StyledLabel>Способ оплаты</StyledLabel>
+          <StyledRadioGroup>
+            <StyledRadioLabel>
               <input
                 type="radio"
                 value="card"
@@ -134,23 +139,23 @@ export const OrderForm = ({ onSuccess, onCancel, onError }: OrderFormProps) => {
                 })}
               />
               Карта
-            </label>
-            <label className={styles.radioLabel}>
+            </StyledRadioLabel>
+            <StyledRadioLabel>
               <input
                 type="radio"
                 value="sbp"
                 {...register('paymentMethod')}
               />
               СБП
-            </label>
-          </div>
+            </StyledRadioLabel>
+          </StyledRadioGroup>
           {errors.paymentMethod && (
-            <span className={styles.error}>{errors.paymentMethod.message}</span>
+            <StyledError>{errors.paymentMethod.message}</StyledError>
           )}
-        </div>
+        </StyledField>
 
         {/* Кнопки */}
-        <div className={styles.buttons}>
+        <StyledButtons>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Оформление...' : 'Заказать'}
           </Button>
@@ -159,8 +164,8 @@ export const OrderForm = ({ onSuccess, onCancel, onError }: OrderFormProps) => {
               Отмена
             </Button>
           )}
-        </div>
-      </form>
-    </div>
+        </StyledButtons>
+      </StyledForm>
+    </StyledWrapper>
   );
 };

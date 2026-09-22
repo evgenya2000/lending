@@ -5,6 +5,9 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 const nextConfig: NextConfig = {
   reactCompiler: true,
   devIndicators: false,
+  compiler: {
+    styledComponents: true,
+  },
   async headers() {
     return [
       {

@@ -1,9 +1,10 @@
 "use client";
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import styles from "./button.module.css";
-
-type ButtonVariant = "primary" | "secondary" | "quantity" | "delete";
-type ButtonFontWeight= "regular" | "bold";
+import {
+  StyledButton,
+  type ButtonFontWeight,
+  type ButtonVariant,
+} from "./button.styles";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -16,23 +17,15 @@ export const Button = ({
   variant = "primary",
   fullWidth = false,
   fontWeight = "bold",
-  className,
   children,
   ...props
-}: ButtonProps) => {
-  const classes = [
-    styles.button,
-    styles[variant],
-    styles[fontWeight],
-    fullWidth ? styles.fullWidth : "",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  return (
-    <button className={classes} {...props}>
-      {children}
-    </button>
-  );
-};
+}: ButtonProps) => (
+  <StyledButton
+    $variant={variant}
+    $fontWeight={fontWeight}
+    $fullWidth={fullWidth}
+    {...props}
+  >
+    {children}
+  </StyledButton>
+);

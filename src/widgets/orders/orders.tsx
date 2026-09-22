@@ -1,6 +1,13 @@
 "use client";
 import { Order } from "@/shared/model/types";
-import styles from "./orders.module.css";
+import {
+  StyledContainer,
+  StyledTitle,
+  StyledTable,
+  StyledEmpty,
+  StyledCopyableTd,
+  StyledCopyMessage,
+} from "./orders.styles";
 import { Button } from "@/shared/ui/button/button";
 import { useModal } from "@/features/modal/lib/use-modal";
 import { useState } from "react";
@@ -11,14 +18,14 @@ export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
   const [isCopied, setIsCopied] = useState(false);
 
   if (!orders || orders.length === 0) {
-    return <div className={styles.empty}>У вас пока нет заказов.</div>;
+    return <StyledEmpty>У вас пока нет заказов.</StyledEmpty>;
   }
 
   return (
-    <div className={styles.container}>
-      <h3 className={styles.title}>Все заказы</h3>
-      <span className={`${styles["copy-message"]} ${isCopied ? styles["visible"] : ""}`}>Текст скопирован</span>
-      <table className={styles.table}>
+    <StyledContainer>
+      <StyledTitle>Все заказы</StyledTitle>
+      <StyledCopyMessage $visible={isCopied}>Текст скопирован</StyledCopyMessage>
+      <StyledTable>
         <thead>
           <tr>
             <th>Статус</th>
@@ -43,16 +50,16 @@ export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
                   ? new Date(order.issuedAt).toLocaleString("ru-RU")
                   : "—"}
               </td>
-              <td className={`${styles["copyable"]}`}
+              <StyledCopyableTd
                 onClick={(e) => handleCopy(e, order.deliveryAddress || '—', setIsCopied)}
-                title="Нажмите, чтобы скопировать">{order.deliveryAddress || "—"}</td>
+                title="Нажмите, чтобы скопировать">{order.deliveryAddress || "-"}</StyledCopyableTd>
               <td>{order.deliveryMethod === "courier" ? "Курьер" : "Почта"}</td>
-              <td className={`${styles["copyable"]}`}
+              <StyledCopyableTd
                 onClick={(e) => handleCopy(e, order.fullName, setIsCopied)}
-                title="Нажмите, чтобы скопировать">{order.fullName}</td>
-              <td className={`${styles["copyable"]}`}
+                title="Нажмите, чтобы скопировать">{order.fullName}</StyledCopyableTd>
+              <StyledCopyableTd
                 onClick={(e) => handleCopy(e, order.phone, setIsCopied)}
-                title="Нажмите, чтобы скопировать">{order.phone}</td>
+                title="Нажмите, чтобы скопировать">{order.phone}</StyledCopyableTd>
               <td>
                 <Button
                   type="button"
@@ -64,7 +71,7 @@ export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
             </tr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </StyledTable>
+    </StyledContainer>
   );
 };
