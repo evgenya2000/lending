@@ -10,7 +10,8 @@ import { useCart } from '@/features/cart/useCart';
 import { Delete } from '@/shared/icons/delete';
 import { useModal } from '@/features/modal/lib/use-modal';
 import { Button } from '@/shared/ui/button/button';
-import { StyledContainer, StyledPrice, StyledWrapper3d, StyledWrapperButton, StyledWrapperText, StyledWrapperTotal, StyledWrapperTotalButton } from './cart.styles';
+import { StyledList, StyledPrice, StyledWrapper3d, StyledWrapperButton, StyledWrapperText, StyledWrapperTotal, StyledWrapperTotalButton } from './cart.styles';
+import { PageContainer } from "@/shared/ui/page-container/page-container";
 
 
 export const Cart = () => {
@@ -36,15 +37,15 @@ export const Cart = () => {
 
     if (items.length === 0) {
         return (
-            <StyledContainer>
+            <PageContainer>
                 <h3>Корзина пуста</h3>
                 <p>Добавьте товары из каталога</p>
-            </StyledContainer>
+            </PageContainer>
         );
     }
 
     return (
-        <StyledContainer>
+        <PageContainer>
             <ContainerCanvas>
                 {items.map((item: Card) => {
                     const key = String(item.id);
@@ -60,7 +61,7 @@ export const Cart = () => {
                 })}
             </ContainerCanvas>
             <h3>Ваша корзина</h3>
-            <ul >
+            <StyledList>
                 {items.map((item: CartItem) => (
                     <li key={item.id} >
                         <StyledWrapper3d
@@ -87,7 +88,7 @@ export const Cart = () => {
                         <StyledPrice>{item.price * item.quantity} руб.</StyledPrice>
                     </li>
                 ))}
-            </ul>
+            </StyledList>
             <StyledWrapperTotal>
                 <h3>Итого: {totalPrice} руб.</h3>
                 <p>Внимание: заказы принимаются от 6 единиц товара!</p>
@@ -100,6 +101,6 @@ export const Cart = () => {
                     </Button>
                 </StyledWrapperTotalButton>
             </StyledWrapperTotal>
-        </StyledContainer>
+        </PageContainer>
     );
 };

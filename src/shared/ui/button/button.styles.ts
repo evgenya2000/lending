@@ -5,18 +5,18 @@ export type ButtonFontWeight = "regular" | "bold";
 
 const variantStyles: Record<ButtonVariant, ReturnType<typeof css>> = {
   primary: css`
-    background-color: #96669a;
+    background-color: var(--color-primary);
 
     &:hover:not(:disabled) {
-      background-color: #5c405e;
+      background-color: var(--color-primary-hover);
     }
   `,
   secondary: css`
-    background-color: #e0e0e0;
-    color: #333;
+    background-color: var(--color-secondary);
+    color: var(--color-text);
 
     &:hover:not(:disabled) {
-      background-color: #bdbdbd;
+      background-color: var(--color-secondary-hover);
     }
   `,
   quantity: css`
@@ -25,14 +25,14 @@ const variantStyles: Record<ButtonVariant, ReturnType<typeof css>> = {
     padding: 0;
     font-size: 16px;
     border-radius: 10px;
-    background-color: #96669a;
-    color: #fff;
+    background-color: var(--color-primary);
+    color: var(--background);
     display: flex;
     align-items: center;
     justify-content: center;
 
     &:hover:not(:disabled) {
-      background-color: #5c405e;
+      background-color: var(--color-primary-hover);
     }
   `,
   delete: css`
@@ -40,12 +40,12 @@ const variantStyles: Record<ButtonVariant, ReturnType<typeof css>> = {
     height: 30px;
     background: none;
     border: none;
-    color: #ff7171;
+    color: var(--color-accent);
     padding: 0;
     border-radius: 0;
 
     &:hover:not(:disabled) {
-      color: #e86568;
+      color: var(--color-accent-hover);
       background: none;
     }
   `,
@@ -57,8 +57,8 @@ export const StyledButton = styled.button<{
   $fullWidth: boolean;
 }>`
   font-size: 14px;
-  color: #fff;
-  background-color: #96669a;
+  color: var(--background);
+  background-color: var(--color-primary);
   border-radius: 14px;
   border: none;
   padding: 0 16px;
@@ -71,7 +71,7 @@ export const StyledButton = styled.button<{
   white-space: nowrap;
 
   &:hover:not(:disabled) {
-    background-color: #5c405e;
+    background-color: var(--color-primary-hover);
   }
 
   &:disabled {

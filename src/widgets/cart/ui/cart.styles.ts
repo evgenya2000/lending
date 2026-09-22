@@ -1,17 +1,12 @@
 import styled from "styled-components";
 
-export const StyledContainer = styled.div`
-  padding: 40px 30px 20px 30px;
-  width: 100%;
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0px 100px;
-  }
+export const StyledList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0px 100px;
 
   li {
     display: flex;
@@ -42,14 +37,14 @@ export const StyledWrapperText = styled.div`
   p {
     margin: 0;
     font-size: 12px;
-    color: #6b6b6b;
+    color: var(--color-text-muted);
   }
 
   p:last-child {
     font-size: 14px;
     font-weight: 400;
-    background-color: #ff7171;
-    color: #fff;
+    background-color: var(--color-accent);
+    color: var(--color-surface);
     border-radius: 64px;
     padding: 6px 10px;
     display: inline-block;
@@ -73,13 +68,13 @@ export const StyledWrapperButton = styled.div`
 export const StyledPrice = styled.div`
   font-size: 18px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text);
   margin-left: 10px;
 `;
 
 export const StyledWrapperTotal = styled.div`
   margin-top: 30px;
-  background: #f9f9f9;
+  background: var(--color-bg-subtle);
   padding: 20px;
   border-radius: 16px;
 
@@ -89,7 +84,7 @@ export const StyledWrapperTotal = styled.div`
 
   p {
     font-size: 14px;
-    color: #6b6b6b;
+    color: var(--color-text-muted);
     margin-bottom: 20px;
   }
 `;

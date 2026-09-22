@@ -7,7 +7,7 @@ export const StyledWrapper = styled.div`
   p {
     font-size: 14px;
     margin-bottom: 16px;
-    color: #6b6b6b;
+    color: var(--color-text-muted);
   }
 `;
 
@@ -26,7 +26,7 @@ export const StyledField = styled.div`
 export const StyledLabel = styled.label`
   font-size: 14px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text);
 `;
 
 export const StyledFormInput = styled(Input)`
@@ -44,12 +44,12 @@ export const StyledRadioLabel = styled.label`
   align-items: center;
   gap: 8px;
   font-size: 14px;
-  color: #444;
+  color: var(--color-text-primary);
   cursor: pointer;
   user-select: none;
 
   input[type='radio'] {
-    accent-color: #96669a;
+    accent-color: var(--color-primary);
     width: 16px;
     height: 16px;
     margin: 0;
@@ -58,7 +58,7 @@ export const StyledRadioLabel = styled.label`
 `;
 
 export const StyledError = styled.span`
-  color: #e74c3c;
+  color: var(--color-error);
   font-size: 12px;
   line-height: 1.2;
 `;

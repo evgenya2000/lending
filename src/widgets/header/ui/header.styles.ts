@@ -6,7 +6,7 @@ export const StyledHeader = styled.header`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffe3e3;
+  background-color: var(--color-surface);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -38,10 +38,10 @@ export const StyledTotalQuantity = styled.span`
   top: -2px;
   left: 20px;
   border-radius: 64px;
-  background-color: #ff7171;
+  background-color: var(--color-accent);
   width: auto;
   text-align: center;
   height: 22px;
   padding: 1px 5px;
-  color: #fff;
+  color: var(--color-text-inverse);
 `;

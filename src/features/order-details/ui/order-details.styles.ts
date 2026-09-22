@@ -44,7 +44,7 @@ export const StyledInfoRow = styled.div`
     right: -20px;
     width: 1px;
     height: 100%;
-    background-color: #ddd;
+    background-color: var(--color-border-2);
   }
 `;
 
@@ -62,14 +62,14 @@ export const StyledTable = styled.table`
   border: none;
 
   th {
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-border-2);
     padding: 8px;
     font-weight: 500;
     text-align: left;
   }
 
   td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-border-2);
     border-top: none;
     padding: 8px;
     font-size: 14px;
@@ -89,11 +89,11 @@ export const StyledTable = styled.table`
   }
 
   tr {
-    background-color: #fff;
+    background-color: var(--background);
     transition: background-color 0.2ms ease;
 
     &:hover {
-      background-color: #ffe3e3;
+      background-color: var(--color-surface);
     }
   }
 
@@ -163,7 +163,7 @@ export const StyledCopyMessage = styled.span<{ $visible: boolean }>`
   position: absolute;
   top: 0;
   right: 35px;
-  color: #6b6b6b;
+  color: var(--color-text-muted);
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition: opacity 0.3s ease;
   font-size: 18px;

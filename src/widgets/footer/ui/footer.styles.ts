@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const StyledFooter = styled.footer`
-  background-color: #ffe3e3;
+  background-color: var(--color-surface);
   height: 130px;
   display: flex;
   flex-direction: column;
   gap: 4px;
   align-items: end;
   padding: 40px 30px 20px 30px;
-  color: #6b6b6b;
+  color: var(--color-text-muted);
   font-size: 14px;
 `;
 
@@ -23,7 +23,7 @@ export const StyledWrapperIcons = styled.div`
     height: 30px;
 
     svg {
-      color: #96669a;
+      color: var(--color-primary);
       transition: all 0.3s ease;
     }
   }
@@ -40,17 +40,12 @@ export const StyledWrapperIcons = styled.div`
   }
   a:nth-child(4) {
     svg:hover {
-      color: #ff7171;
+      color: var(--color-accent);
     }
   }
   a:nth-child(5) {
     svg:hover {
-      color: #000000;
+      color: var(--color-text-primary);
     }
   }
-`;
-
-export const StyledCopyMessage = styled.span<{ $visible?: boolean }>`
-  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
-  transition: opacity 0.3s ease;
 `;

@@ -1,0 +1,8 @@
+'use client';
+
+import styled from 'styled-components';
+
+export const PageContainer = styled.div`
+  padding: 40px 30px 20px;
+  width: 100%;
+`;

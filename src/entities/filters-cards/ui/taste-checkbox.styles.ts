@@ -15,28 +15,28 @@ export const StyledOptionLabel = styled.label<{ $active: boolean }>`
   font-size: 0.9rem;
   line-height: 1.4;
   border-radius: 10px;
-  background: #ffffff;
-  border: 1.5px solid #dcdcdc;
-  color: #444;
+  background: var(--background);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-secondary);
   cursor: pointer;
   user-select: none;
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: #8e8e8e;
-    background: #f0f0f0;
+    border-color: var(--color-border-hover);
+    background: var(--color-bg-hover);
   }
 
   ${({ $active }) =>
     $active &&
     css`
-      background: #96669a;
-      border-color: #96669a;
-      color: #ffffff;
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--background);
 
       &:hover {
-        background: #96669a;
-        border-color: #96669a;
+        background: var(--color-primary);
+        border-color: var(--color-primary);
       }
     `}
 `;

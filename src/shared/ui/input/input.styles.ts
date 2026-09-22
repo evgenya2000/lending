@@ -1,25 +1,25 @@
 import styled from "styled-components";
 
 export const StyledInput = styled.input`
-  color: #6b6b6b;
+  color: var(--color-text-muted);
   height: 30px;
   padding: 4px 8px;
   font-size: 16px;
-  border: 1.5px solid #dcdcdc;
+  border: 1.5px solid var(--color-border);
   transition: all 0.3s ease;
-  background-color: #fff;
+  background-color: var(--background);
   box-sizing: border-box;
 
   &:focus-visible {
     outline: none;
-    border-color: #8e8e8e;
-    color: #000;
-    background: #f0f0f0;
+    border-color: var(--color-border-hover);
+    color: var(--color-text-primary);
+    background: var(--color-bg-hover);
   }
 
   &:hover {
-    border-color: #8e8e8e;
-    color: #000;
-    background: #f0f0f0;
+    border-color: var(--color-border-hover);
+    color: var(--color-text-primary);
+    background: var(--color-bg-hover);
   }
 `;

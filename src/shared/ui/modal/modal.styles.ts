@@ -37,7 +37,7 @@ export const StyledOverlay = styled.div`
 `;
 
 export const StyledModal = styled.div`
-  background-color: #ffffff;
+  background-color: var(--background);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   max-width: 90vw;
@@ -64,8 +64,8 @@ export const StyledModal = styled.div`
   }
 
   @media (prefers-color-scheme: dark) {
-    background-color: #1e1e1e;
-    color: #ffffff;
+    background-color: var(--background-black);
+    color: var(--background);
   }
 `;
 
@@ -95,17 +95,17 @@ export const StyledCloseButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666;
+  color: var(--color-text-muted-2);
   transition: all 0.2s ease;
   z-index: 1;
 
   &:hover {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: var(--color-bg-hover);
+    color: var(--color-text);
   }
 
   &:focus {
-    outline: 2px solid #007bff;
+    outline: 2px solid var(--color-outline);
     outline-offset: 2px;
   }
 
@@ -115,11 +115,11 @@ export const StyledCloseButton = styled.button`
   }
 
   @media (prefers-color-scheme: dark) {
-    color: #999;
+    color: var(--color-text-muted);
 
     &:hover {
-      background-color: #333;
-      color: #fff;
+      background-color: var(--color-text);
+      color: var(--background);
     }
   }
 `;

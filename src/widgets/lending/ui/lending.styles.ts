@@ -31,15 +31,15 @@ export const StyledCardWrapperText = styled.div`
 
 export const StyledCardDescription = styled.p`
   font-size: 12px;
-  color: #6b6b6b;
+  color: var(--color-text-muted);
   margin-bottom: auto;
 `;
 
 export const StyledCardPrice = styled.p`
   font-size: 14px;
   font-weight: 400;
-  background-color: #ff7171;
-  color: #fff;
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
   border-radius: 64px;
   width: max-content;
   height: 28px;

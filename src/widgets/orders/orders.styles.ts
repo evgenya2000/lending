@@ -16,7 +16,7 @@ export const StyledTable = styled.table`
 
   th,
   td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-border);
     padding: 8px;
     text-align: left;
   }
@@ -56,7 +56,7 @@ export const StyledTable = styled.table`
 
 export const StyledEmpty = styled.div`
   padding: 0 10px 10px 10px;
-  color: #666;
+  color: var(--color-text-muted-2);
 `;
 
 export const StyledCopyableTd = styled.td`
@@ -72,7 +72,7 @@ export const StyledCopyMessage = styled.span<{ $visible: boolean }>`
   position: absolute;
   top: 40px;
   right: 30px;
-  color: #6b6b6b;
+  color: var(--color-text-muted);
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition: opacity 0.3s ease;
   font-size: 18px;
