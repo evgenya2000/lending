@@ -29,6 +29,9 @@ export const GlobalStyle = createGlobalStyle`
     --color-text-inverse: #ffffff;
     --color-bg-subtle: #f9f9f9;
     --color-outline: #007bff;
+
+    /* Высота шапки: задаётся явно, чтобы выезжающие панели могли встать под ней. */
+    --header-height: 103px;
   }
 
   @media (prefers-color-scheme: dark) {

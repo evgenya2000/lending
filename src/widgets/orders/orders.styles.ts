@@ -78,7 +78,7 @@ export const StyledCopyMessage = styled.span<{ $visible: boolean }>`
   font-size: 18px;
 `;
 
-export const StyledWrapperButton = styled.div `
+export const StyledWrapperButton = styled.div`
   display: flex;
   gap: 10px;
-`
+`;

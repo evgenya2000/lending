@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
 
+import { media } from "@/shared/lib/styles";
+
 export type ButtonVariant = "primary" | "secondary" | "quantity" | "delete";
 export type ButtonFontWeight = "regular" | "bold";
 
@@ -95,4 +97,11 @@ export const StyledButton = styled.button<{
     css`
       width: 100%;
     `}
+
+  ${media.down("md")`
+    height: 32px;
+    padding: 0 12px;
+    font-size: 13px;
+  `}
 `;
+

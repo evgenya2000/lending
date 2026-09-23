@@ -8,7 +8,6 @@ import { useVisibilityTracker } from "@/shared/lib/hooks/use-visibility-tracker"
 import { useCart } from "@/features/cart/useCart";
 import { Button } from "@/shared/ui/button/button";
 import {
-  StyledGrid,
   StyledCardWrapper,
   StyledCardWrapperText,
   StyledCardDescription,
@@ -16,6 +15,7 @@ import {
   StyledCardQuantity,
   StyledWrapper3d,
   StyledText,
+  StyledFlex,
 } from "./lending.styles";
 
 
@@ -53,7 +53,7 @@ export const Lending = ({ cards }: { cards: Card[] }) => {
         })}
       </ContainerCanvas>
 
-      <StyledGrid>
+      <StyledFlex>
         {cards.map((card: Card) => {
           const key = String(card.id);
           const quantity = getQuantityInCart(card.id);
@@ -84,7 +84,7 @@ export const Lending = ({ cards }: { cards: Card[] }) => {
             </StyledCardWrapper>
           );
         })}
-      </StyledGrid>
+      </StyledFlex>
     </>
   );
 };

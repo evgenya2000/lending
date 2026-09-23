@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-export const StyledGrid = styled.div`
+export const StyledFlex = styled.div`
   display: grid;
-  justify-items: center;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   gap: 50px 20px;
   padding: 0 10px 10px 10px;
 `;
@@ -40,7 +39,7 @@ export const StyledCardPrice = styled.p`
   font-weight: 400;
   background-color: var(--color-accent);
   color: var(--color-text-inverse);
-  border-radius: 64px;
+  border-radius: 30px;
   width: max-content;
   height: 28px;
   padding: 6px 10px;

@@ -5,7 +5,7 @@ export const StyledList = styled.ul`
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(650px, 1fr));
   gap: 0px 100px;
 
   li {
@@ -13,6 +13,7 @@ export const StyledList = styled.ul`
     align-items: center;
     gap: 20px;
     padding: 15px;
+    width: 650px;
   }
 `;
 
