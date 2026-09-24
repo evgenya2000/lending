@@ -89,6 +89,7 @@ export interface Order {
     product: Card
   }[];
   createdAt: string;
-  status: 'PENDING' | 'ASSEMBLED' | 'COMPLETED' | 'CANSELED';
+  status: 'PENDING' | 'ASSEMBLED' | 'DELIVERING' | 'COMPLETED' | 'CANSELED';
   issuedAt?: string;
+  courierName?: string;
 }

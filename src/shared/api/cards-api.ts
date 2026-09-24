@@ -32,6 +32,14 @@ export const cardsApi = createApi({
       }),
       invalidatesTags: ['Orders'],
     }),
+    deliverOrder: builder.mutation<Order, { id: number; courierName: string }>({
+      query: ({ id, courierName }) => ({
+        url: `/orders/${id}/deliver`,
+        method: 'PATCH',
+        body: { courierName },
+      }),
+      invalidatesTags: ['Orders'],
+    }),
   }),
 });
 
@@ -41,4 +49,5 @@ export const {
   useGetOrdersQuery,
   useCreateOrderMutation,
   useAssembleOrderMutation,
+  useDeliverOrderMutation,
 } = cardsApi;
