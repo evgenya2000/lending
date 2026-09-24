@@ -35,7 +35,7 @@ export const OrderDetails = ({ order }: { order: Order }) => {
             <StyledInfo>
                 <StyledInfoRow>
                     <StyledInfoLabel>Статус:</StyledInfoLabel>
-                    <StyledInfoValue>{order.status === "PENDING" ? "Ожидает" : order.status === "ASSEMBLED" ? "Собран" : "-"}</StyledInfoValue>
+                    <StyledInfoValue>{order.status === "PENDING" ? "Ожидает" : order.status === "ASSEMBLED" ? "Собран" : order.status === "DELIVERING" ? "Доставляется" : "-"}</StyledInfoValue>
                 </StyledInfoRow>
 
                 <StyledInfoRow>

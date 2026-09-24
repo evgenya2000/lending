@@ -13,6 +13,7 @@ import { Button } from "@/shared/ui/button/button";
 import { useModal } from "@/features/modal/lib/use-modal";
 import { useState } from "react";
 import { handleCopy } from "@/shared/lib/helps/handleCopy";
+import { getOrderStatusLabel } from "@/shared/lib/helps/get-order-status-label";
 import { useMediaQuery } from "@/shared/lib/hooks/use-media-query";
 import { getBreakpoint } from "@/shared/lib/styles";
 import { OrdersCards } from "./orders-cards";
@@ -22,6 +23,7 @@ const CARD_VIEW_QUERY = `(max-width: ${getBreakpoint("xxl") - 1}px)`;
 export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
   const orderDetailsModal = useModal('order-details');
   const assembleOrderModal = useModal('assemble-order');
+  const deliverOrderModal = useModal('deliver-order');
 
   const [isCopied, setIsCopied] = useState(false);
   const isCardView = useMediaQuery(CARD_VIEW_QUERY);
@@ -55,7 +57,7 @@ export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
           <tbody>
             {orders.map((order) => (
               <tr key={order.id}>
-                <td>{order.status === "PENDING" ? "Ожидает" : order.status === "ASSEMBLED" ? "Собран" : "-"}</td>
+                <td>{getOrderStatusLabel(order.status)}</td>
                 <td>{order.id}</td>
                 <td>{new Date(order.createdAt).toLocaleString("ru-RU")}</td>
                 <td>
@@ -87,6 +89,14 @@ export const Orders = ({ orders }: { orders: Order[] | undefined }) => {
                         onClick={() => assembleOrderModal.open(order)}
                       >
                         Собрать заказ
+                      </Button>
+                    )}
+                    {order.status === "ASSEMBLED" && (
+                      <Button
+                        type="button"
+                        onClick={() => deliverOrderModal.open(order)}
+                      >
+                        Передать заказ курьеру
                       </Button>
                     )}
                   </StyledWrapperButton>

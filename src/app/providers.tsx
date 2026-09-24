@@ -9,6 +9,7 @@ import { useModal } from '@/features/modal/lib/use-modal';
 import { OrderForm } from '@/features/order-form/ui/order-form';
 import { OrderDetails } from '@/features/order-details/ui/order-details';
 import { AssembleOrder } from '@/features/assemble-order/ui/assemble-order';
+import { DeliverOrder } from '@/features/deliver-order/ui/deliver-order';
 import { Answer } from '@/features/answer/ui/answer';
 import { StyledComponentsRegistry } from './styled-registry';
 import { GlobalStyle } from './global-styles';
@@ -17,6 +18,7 @@ function ModalHost() {
   const orderModal = useModal('order');
   const orderDetailsModal = useModal('order-details');
   const assembleOrderModal = useModal('assemble-order');
+  const deliverOrderModal = useModal('deliver-order');
   const successModal = useModal('success');
   const errorModal = useModal('error');
 
@@ -54,6 +56,25 @@ function ModalHost() {
               successModal.open('Заказ собран');
             }}
             onCancel={assembleOrderModal.close}
+            onError={errorModal.open}
+          />
+        )}
+      </Modal>
+
+      <Modal
+        isOpen={deliverOrderModal.isOpen}
+        onClose={deliverOrderModal.close}
+        showCloseButton
+        ariaLabel={"deliverOrderModal"}
+      >
+        {deliverOrderModal.data && (
+          <DeliverOrder
+            order={deliverOrderModal.data}
+            onSuccess={() => {
+              deliverOrderModal.close();
+              successModal.open('Заказ передан курьеру');
+            }}
+            onCancel={deliverOrderModal.close}
             onError={errorModal.open}
           />
         )}

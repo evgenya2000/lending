@@ -4,6 +4,7 @@ import { Order } from "@/shared/model/types";
 import { Button } from "@/shared/ui/button/button";
 import { useModal } from "@/features/modal/lib/use-modal";
 import { handleCopy } from "@/shared/lib/helps/handleCopy";
+import { getOrderStatusLabel } from "@/shared/lib/helps/get-order-status-label";
 import {
   StyledCardsList,
   StyledCard,
@@ -19,15 +20,12 @@ interface OrdersCardsProps {
   setIsCopied: (value: boolean) => void;
 }
 
-const getStatusLabel = (status: Order["status"]) => {
-  if (status === "PENDING") return "Ожидает";
-  if (status === "ASSEMBLED") return "Собран";
-  return "-";
-};
+
 
 export const OrdersCards = ({ orders, setIsCopied }: OrdersCardsProps) => {
   const orderDetailsModal = useModal("order-details");
   const assembleOrderModal = useModal("assemble-order");
+  const deliverOrderModal = useModal("deliver-order");
 
   return (
     <StyledCardsList>
@@ -35,7 +33,7 @@ export const OrdersCards = ({ orders, setIsCopied }: OrdersCardsProps) => {
         <StyledCard key={order.id}>
           <StyledCardRow>
             <StyledCardLabel>Статус</StyledCardLabel>
-            <StyledCardValue>{getStatusLabel(order.status)}</StyledCardValue>
+            <StyledCardValue>{getOrderStatusLabel(order.status)}</StyledCardValue>
           </StyledCardRow>
 
           <StyledCardRow>
@@ -111,6 +109,14 @@ export const OrdersCards = ({ orders, setIsCopied }: OrdersCardsProps) => {
                 onClick={() => assembleOrderModal.open(order)}
               >
                 Собрать заказ
+              </Button>
+            )}
+            {order.status === "ASSEMBLED" && (
+              <Button
+                type="button"
+                onClick={() => deliverOrderModal.open(order)}
+              >
+                Передать заказ курьеру
               </Button>
             )}
           </StyledCardActions>
