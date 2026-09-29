@@ -5,9 +5,9 @@ import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const MODEL_PATH = '/macaron_conf1_draco.glb';
+const MODEL_PATH = '/macaron_3ver.glb';
 
-useGLTF.setDecoderPath('/draco/');
+/* useGLTF.setDecoderPath('/draco/'); */
 useGLTF.preload(MODEL_PATH);
 
 const DEFAULT_COLORS = {
@@ -48,7 +48,7 @@ function LoadedMacaron({
     cloned.traverse((child) => {
       if (isMesh(child)) {
         const partName = child.name;
-        if (partName === 'Top' || partName === 'Bottom' || partName === 'Center') {
+        if (partName === 'Top' || partName === 'Top.001' || partName === 'Bottom' || partName === 'Bottom.001' || partName === 'Center') {
           const material = child.material;
 
           const processMaterial = (mat: THREE.Material) => {
@@ -57,8 +57,8 @@ function LoadedMacaron({
               newMat.map = null;
               newMat.needsUpdate = true;
               newMat.color.set(
-                partName === 'Top' ? topColor :
-                partName === 'Bottom' ? bottomColor :
+                partName === 'Top' || partName === 'Top.001' ? topColor :
+                partName === 'Bottom' || partName === 'Bottom.001' ? bottomColor :
                 centerColor
               );
               return newMat;
