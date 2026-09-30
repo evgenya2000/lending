@@ -19,3 +19,25 @@
 ## 3D
 - [ ] Сделать разные 3D модели макарон (сейчас одна модель `macaron_conf1_draco.glb` с перекраской)
 - [ ] Настроить хранение 3D моделей в БД (сейчас модели лежат в `public/`)
+
+
+# Потенциальные риски и вопросы
+1. React 19 + R3F 9 + Drei 10 — cutting edge
+Комбинация очень свежих мажорных версий. Возможны:
+Нестабильность сторонних библиотек.
+Проблемы совместимости с @types/three , babel-plugin-react-compiler .
+Необходимость частых обновлений.
+2. cart-slice.tsx — техдолг с типами
+В addItem используется JSON.parse(JSON.stringify(action.payload)) + @ts-expect-error из-за несовместимости WritableDraft<CartItem> с readonly-типами из @react-three/drei . Это рабочий, но хрупкий костыль. Стоит вынести 3D-конфигурацию за пределы сущности корзины или типизировать CartItem отдельно от Card .
+3. Минимальное покрытие тестами
+Тесты есть только на:
+cart-slice
+sanitize
+handleCopy
+Нет тестов на:
+RTK Query endpoints
+формы заказа
+3D-компоненты
+хуки (useCart , useCatalogFilter )
+4. Отсутствие Docker
+В AGENTS.md явно указано: «No Docker setup». Для продакшена это может усложнить деплой.

@@ -17,7 +17,7 @@
 - **Framework**: [Next.js 14+](https://nextjs.org/) (App Router)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/) & [RTK Query](https://redux-toolkit.js.org/rtk-query/overview)
-- **Styling**: CSS Modules
+- **Styling**: styled-components
 
 ### 3D Graphics
 - **Engine**: [Three.js](https://threejs.org/)
